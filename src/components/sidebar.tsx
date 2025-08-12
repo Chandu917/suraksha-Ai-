@@ -19,6 +19,8 @@ import {
   LogIn,
   Home,
   BotMessageSquare,
+  Link2,
+  KeyRound,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -26,6 +28,8 @@ import { Button } from './ui/button'
 
 const menuItems = [
   { href: '/chat', label: 'Chat', icon: MessageSquare },
+  { href: '/scan-url', label: 'URL Scanner', icon: Link2 },
+  { href: '/password-strength', label: 'Password Strength', icon: KeyRound },
   { href: '/library', label: 'Library', icon: BookText },
   { href: '/search', label: 'Search', icon: Search },
 ]

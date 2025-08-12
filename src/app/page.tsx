@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ShieldCheck, Microscope, Landmark, BotMessageSquare } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Microscope, Landmark, BotMessageSquare, Link2 } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
 export default function LandingPage() {
@@ -30,7 +30,7 @@ export default function LandingPage() {
                 India's AI Guardian for Cyber Safety
               </h1>
               <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl">
-                Instantly analyze suspicious messages, understand cyber threats, and learn about your legal rights under Indian law. Your digital world, secured.
+                Instantly analyze suspicious messages, scan URLs, and learn about your legal rights under Indian law. Your digital world, secured.
               </p>
               <div className="flex flex-col gap-4 min-[400px]:flex-row">
                 <Button asChild size="lg" className="shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow">
@@ -59,12 +59,19 @@ export default function LandingPage() {
                 From identifying phishing scams to explaining legal recourse, we've got you covered.
               </p>
             </div>
-            <div className="grid max-w-5xl gap-8 mx-auto sm:grid-cols-1 md:grid-cols-3">
-              <div className="p-6 text-center transition-transform duration-300 transform bg-background rounded-xl shadow-lg hover:scale-105">
+            <div className="grid max-w-6xl gap-8 mx-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+               <div className="p-6 text-center transition-transform duration-300 transform bg-background rounded-xl shadow-lg hover:scale-105">
                 <ShieldCheck className="w-12 h-12 mx-auto mb-4 text-primary" />
                 <h3 className="text-2xl font-bold">Instant Threat Analysis</h3>
                 <p className="mt-2 text-muted-foreground">
-                  Paste a suspicious message or link to get an immediate, clear explanation of the potential threat.
+                  Paste a suspicious message to get an immediate, clear explanation of the potential threat.
+                </p>
+              </div>
+               <div className="p-6 text-center transition-transform duration-300 transform bg-background rounded-xl shadow-lg hover:scale-105">
+                <Link2 className="w-12 h-12 mx-auto mb-4 text-primary" />
+                <h3 className="text-2xl font-bold">URL Scanner</h3>
+                <p className="mt-2 text-muted-foreground">
+                  Check if a link is safe before you click. Analyze URLs for phishing, malware, and other dangers.
                 </p>
               </div>
               <div className="p-6 text-center transition-transform duration-300 transform bg-background rounded-xl shadow-lg hover:scale-105">

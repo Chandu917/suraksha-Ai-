@@ -18,6 +18,8 @@ export function Header() {
   const pathname = usePathname()
   const getTitle = () => {
     if (pathname.startsWith('/chat')) return 'Chat'
+    if (pathname.startsWith('/scan-url')) return 'URL Scanner'
+    if (pathname.startsWith('/password-strength')) return 'Password Strength'
     if (pathname.startsWith('/library')) return 'Library'
     if (pathname.startsWith('/search')) return 'Search'
     if (pathname.startsWith('/settings')) return 'Settings'

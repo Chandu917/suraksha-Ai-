@@ -2,6 +2,7 @@
 
 import { detectMode } from '@/ai/flows/mode-detection'
 import { threatExplainer } from '@/ai/flows/threat-explainer'
+import { scanUrl, ScanUrlInput, ScanUrlOutput } from '@/ai/flows/url-scanner'
 import { type Message } from '@/lib/types'
 
 export async function getAiResponse(history: Message[]): Promise<Message> {
@@ -70,6 +71,21 @@ export async function getAiResponse(history: Message[]): Promise<Message> {
       id,
       role: 'assistant',
       content: 'Sorry, I encountered an error while processing your request. Please try again later.',
+    };
+  }
+}
+
+
+export async function getUrlScanResponse(input: ScanUrlInput): Promise<ScanUrlOutput> {
+  try {
+    const result = await scanUrl(input);
+    return result;
+  } catch (error) {
+    console.error('Error getting URL scan response:', error);
+    return {
+      isSafe: false,
+      threatType: 'Unknown',
+      report: 'Sorry, I encountered an error while scanning the URL. Please try again later.',
     };
   }
 }
