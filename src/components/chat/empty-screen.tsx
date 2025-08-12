@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, BotMessageSquare } from "lucide-react"
+import { Logo } from "../icons/logo"
 
 interface EmptyScreenProps {
   onSelectPrompt: (prompt: string) => void
@@ -19,7 +20,7 @@ export function EmptyScreen({ onSelectPrompt }: EmptyScreenProps) {
   return (
     <div className="flex h-full items-center justify-center p-4">
       <div className="w-full max-w-2xl text-center">
-        <BotMessageSquare className="w-16 h-16 mx-auto mb-4 text-primary" />
+        <Logo className="w-24 h-24 mx-auto mb-4 text-primary" />
         <h2 className="text-2xl font-semibold text-foreground">Welcome to SurakshaAI</h2>
         <p className="mt-2 text-muted-foreground">How can I help you stay safe today?</p>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
