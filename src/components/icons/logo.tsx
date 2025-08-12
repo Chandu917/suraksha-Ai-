@@ -12,9 +12,11 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
       strokeLinejoin="round"
       {...props}
     >
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      <path d="m9.5 14.5 5-5" />
-      <path d="m14.5 14.5-5-5" />
+      <path d="M12 3L9.5 9.5 3 12l6.5 2.5L12 21l2.5-6.5L21 12l-6.5-2.5z" />
+      <path d="M3 3l2.5 6" />
+      <path d="M21 3l-2.5 6" />
+      <path d="M3 21l2.5-6" />
+      <path d="M21 21l-2.5-6" />
     </svg>
   );
 }
