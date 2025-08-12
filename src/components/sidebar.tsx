@@ -18,17 +18,16 @@ import {
   LogOut,
   LogIn,
   Home,
+  BotMessageSquare,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from './ui/button'
 
 const menuItems = [
-  { href: '/', label: 'Home', icon: Home },
   { href: '/chat', label: 'Chat', icon: MessageSquare },
   { href: '/library', label: 'Library', icon: BookText },
   { href: '/search', label: 'Search', icon: Search },
-  { href: '/settings', label: 'Settings', icon: Settings },
 ]
 
 export function AppSidebar() {
@@ -41,7 +40,7 @@ export function AppSidebar() {
         <Link href="/" className="flex items-center gap-2">
           <Button variant="ghost" size="icon" className="shrink-0" asChild>
             <span className="flex items-center justify-center">
-              <Logo className="size-5 text-primary" />
+              <Logo className="size-6 text-primary" />
             </span>
           </Button>
           <span className="text-lg font-semibold">SurakshaAI</span>
@@ -53,7 +52,7 @@ export function AppSidebar() {
           <SidebarMenuItem key={item.href}>
             <Link href={item.href}>
               <SidebarMenuButton
-                isActive={pathname === item.href}
+                isActive={pathname.startsWith(item.href)}
                 tooltip={item.label}
               >
                 <item.icon />
@@ -65,6 +64,17 @@ export function AppSidebar() {
       </SidebarMenu>
 
       <SidebarFooter>
+         <SidebarMenuItem>
+            <Link href="/settings">
+              <SidebarMenuButton
+                isActive={pathname.startsWith('/settings')}
+                tooltip={'Settings'}
+              >
+                <Settings />
+                <span>{'Settings'}</span>
+              </SidebarMenuButton>
+            </Link>
+          </SidebarMenuItem>
         <SidebarMenuItem>
           <Link href="#">
             <SidebarMenuButton tooltip={isLoggedIn ? 'Logout' : 'Login'}>
