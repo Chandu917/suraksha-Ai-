@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { getUrlScanResponse } from '@/app/actions';
-import { type ScanUrlOutput } from '@/ai/flows/url-scanner';
+import { type ScanUrlOutput } from '@/ai/schemas/url-scanner';
 
 import { Header } from "@/components/header";
 import { AppSidebar } from "@/components/sidebar";

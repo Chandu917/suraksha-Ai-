@@ -2,7 +2,8 @@
 
 import { detectMode } from '@/ai/flows/mode-detection'
 import { threatExplainer } from '@/ai/flows/threat-explainer'
-import { scanUrl, ScanUrlInput, ScanUrlOutput } from '@/ai/flows/url-scanner'
+import { scanUrl } from '@/ai/flows/url-scanner'
+import { type ScanUrlInput, type ScanUrlOutput } from '@/ai/schemas/url-scanner'
 import { type Message } from '@/lib/types'
 
 export async function getAiResponse(history: Message[]): Promise<Message> {

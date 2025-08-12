@@ -4,28 +4,15 @@
  * @fileOverview This file contains the URL scanning flow for SurakshaAI.
  *
  * - scanUrl - A function that analyzes a URL for potential threats.
- * - ScanUrlInput - The input type for the scanUrl function.
- * - ScanUrlOutput - The return type for the scanUrl function.
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
-
-export const ScanUrlInputSchema = z.object({
-  url: z.string().url().describe('The URL to be analyzed for threats.'),
-});
-export type ScanUrlInput = z.infer<typeof ScanUrlInputSchema>;
-
-export const ScanUrlOutputSchema = z.object({
-  isSafe: z
-    .boolean()
-    .describe('Whether the URL is considered safe or not.'),
-  threatType: z
-    .enum(['None', 'Phishing', 'Malware', 'Spam', 'Suspicious', 'Unknown'])
-    .describe('The type of threat detected.'),
-  report: z.string().describe('A detailed report of the findings.'),
-});
-export type ScanUrlOutput = z.infer<typeof ScanUrlOutputSchema>;
+import {
+  ScanUrlInputSchema,
+  type ScanUrlInput,
+  ScanUrlOutputSchema,
+  type ScanUrlOutput,
+} from '@/ai/schemas/url-scanner';
 
 export async function scanUrl(input: ScanUrlInput): Promise<ScanUrlOutput> {
   return urlScannerFlow(input);
