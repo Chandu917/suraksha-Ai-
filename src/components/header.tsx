@@ -13,6 +13,8 @@ import {
 import { Button } from './ui/button'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { Badge } from './ui/badge'
+import { CheckCircle } from 'lucide-react'
 
 export function Header() {
   const pathname = usePathname()
@@ -22,7 +24,7 @@ export function Header() {
     if (pathname.startsWith('/password-strength')) return 'Password Strength'
     if (pathname.startsWith('/library')) return 'Library'
     if (pathname.startsWith('/search')) return 'Search'
-    if (pathname.startsWith('/settings')) return 'Settings'
+    if (pathname.startsWith('/settings')) return 'Profile & Security'
     return 'Home'
   }
 
@@ -35,16 +37,21 @@ export function Header() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="rounded-full">
-            <Avatar>
-              <AvatarImage src="https://placehold.co/32x32.png" alt="User Avatar" data-ai-hint="person avatar" />
-              <AvatarFallback>U</AvatarFallback>
-            </Avatar>
+             <div className="relative">
+                <Avatar>
+                  <AvatarImage src="https://placehold.co/32x32.png" alt="User Avatar" data-ai-hint="person avatar" />
+                  <AvatarFallback>U</AvatarFallback>
+                </Avatar>
+                <Badge variant="secondary" className="absolute -bottom-1 -right-2 p-0.5 border-2 border-background">
+                    <CheckCircle className="w-3 h-3 text-green-600" />
+                </Badge>
+             </div>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem asChild><Link href="/settings">Settings</Link></DropdownMenuItem>
+          <DropdownMenuItem asChild><Link href="/settings">Profile & Security</Link></DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Logout</DropdownMenuItem>

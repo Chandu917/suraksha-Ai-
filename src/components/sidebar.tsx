@@ -72,10 +72,10 @@ export function AppSidebar() {
             <Link href="/settings">
               <SidebarMenuButton
                 isActive={pathname.startsWith('/settings')}
-                tooltip={'Settings'}
+                tooltip={'Profile & Security'}
               >
                 <Settings />
-                <span>{'Settings'}</span>
+                <span>{'Profile & Security'}</span>
               </SidebarMenuButton>
             </Link>
           </SidebarMenuItem>

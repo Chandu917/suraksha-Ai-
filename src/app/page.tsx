@@ -22,11 +22,11 @@ export default function LandingPage() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative w-full pt-24 pb-32 md:pt-32 md:pb-40">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 via-transparent to-accent/10 -z-10"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 -z-10"></div>
           <div className="container px-4 md:px-6 text-center">
             <div className="flex flex-col items-center space-y-6">
               <BotMessageSquare className="w-20 h-20 text-primary animate-pulse" />
-              <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-foreground">
+              <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-foreground">
                 India's AI Guardian for Cyber Safety
               </h1>
               <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl">
@@ -50,7 +50,7 @@ export default function LandingPage() {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="w-full py-16 md:py-24 bg-secondary/50">
+        <section id="features" className="w-full py-16 md:py-24 bg-secondary/10">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
               <div className="inline-block px-4 py-1 text-sm font-semibold rounded-full bg-primary text-primary-foreground">Key Features</div>
@@ -122,14 +122,14 @@ export default function LandingPage() {
         </section>
 
         {/* Final CTA Section */}
-        <section className="w-full py-16 text-white md:py-24 bg-gradient-to-r from-primary to-accent">
+        <section className="w-full py-16 text-white md:py-24 bg-gradient-to-r from-primary to-blue-700">
             <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
                 <div className="space-y-3">
                     <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Feeling Unsure? Get a Second Opinion.</h2>
                     <p className="mx-auto max-w-xl text-primary-foreground/80">Don't risk your security. A quick check can provide peace of mind.</p>
                 </div>
                 <div className="mx-auto w-full max-w-sm space-y-2">
-                    <Button asChild size="lg" variant="outline" className="text-primary bg-primary-foreground hover:bg-primary-foreground/90 hover:text-primary">
+                    <Button asChild size="lg" variant="secondary" className="text-secondary-foreground bg-secondary hover:bg-secondary/90">
                         <Link href="/chat">
                             Chat with SurakshaAI Now
                         </Link>
@@ -140,7 +140,7 @@ export default function LandingPage() {
 
       </main>
 
-      <footer className="flex flex-col items-center justify-center w-full h-24 gap-2 px-4 border-t shrink-0 md:px-6 bg-secondary/50">
+      <footer className="flex flex-col items-center justify-center w-full h-24 gap-2 px-4 border-t shrink-0 md:px-6 bg-secondary/10">
         <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} SurakshaAI. All rights reserved.</p>
       </footer>
     </div>
