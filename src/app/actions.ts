@@ -57,7 +57,7 @@ export async function getAiResponse(history: Message[]): Promise<Message> {
         return {
           id,
           role: 'assistant',
-          content: 'I understand you might have a problem. Could you please describe it in more detail so I can assist you better?',
+          content: "It sounds like you're dealing with a security concern. I'm here to help. Please describe the situation in as much detail as you can. For example, you can paste the full text of a suspicious email, SMS, or share a link you're worried about. The more information you provide, the better I can assist you.",
         }
 
       case 'Unknown':
