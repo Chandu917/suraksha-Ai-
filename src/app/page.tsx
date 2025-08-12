@@ -28,7 +28,7 @@ export default function LandingPage() {
                 <Sparkles className="w-16 h-16 text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary" />
               </div>
               <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-br from-gray-200 to-gray-500">
-                Your AI Guardian for a Safer Digital India
+                Your AI Cybersecurity Guardian for a Safer Digital India
               </h1>
               <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl">
                 Harnessing the power of advanced AI to protect your digital life. Analyze threats, secure your identity, and understand your rights.
