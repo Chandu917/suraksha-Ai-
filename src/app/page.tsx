@@ -1,3 +1,18 @@
-export default function Home() {
-  return <></>;
+import { ChatPanel } from '@/components/chat/chat-panel'
+import { Header } from '@/components/header'
+import { AppSidebar } from '@/components/sidebar'
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
+
+export default function HomePage() {
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset className="flex flex-col bg-background">
+        <Header />
+        <main className="flex-1 overflow-hidden">
+          <ChatPanel />
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
+  )
 }
