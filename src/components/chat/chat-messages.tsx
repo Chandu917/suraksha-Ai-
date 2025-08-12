@@ -10,9 +10,10 @@ import { Shield } from 'lucide-react'
 interface ChatMessagesProps {
   messages: Message[]
   isLoading: boolean
+  onSaveMessage: (message: Message) => void
 }
 
-export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
+export function ChatMessages({ messages, isLoading, onSaveMessage }: ChatMessagesProps) {
   const scrollableContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
     <div ref={scrollableContainerRef} className="h-full overflow-y-auto p-4 md:p-6">
       <div className="mx-auto max-w-3xl space-y-6">
         {messages.map((message, index) => (
-          <ChatMessage key={index} message={message} />
+          <ChatMessage key={index} message={message} onSave={onSaveMessage} />
         ))}
         {isLoading && (
           <div className="flex items-start gap-4">

@@ -9,7 +9,8 @@ import { useToast } from '@/hooks/use-toast'
 import { Fragment, useEffect, useState } from 'react'
 
 interface ChatMessageProps {
-  message: Message
+  message: Message,
+  onSave: (message: Message) => void
 }
 
 function TypingEffect({ text, onFinished }: { text: string; onFinished: () => void }) {
@@ -70,25 +71,21 @@ function renderContentWithLinks(content: string) {
 }
 
 
-export function ChatMessage({ message }: ChatMessageProps) {
+export function ChatMessage({ message, onSave }: ChatMessageProps) {
   const { toast } = useToast()
   const [isTyping, setIsTyping] = useState(message.role === 'assistant')
 
   const isUser = message.role === 'user'
-  const urlRegex = /(https?:\/\/[^\s]+)/g
-  const hasLink = urlRegex.test(message.content)
-
+  
   const handleCopy = () => {
     navigator.clipboard.writeText(message.content)
     toast({
       description: 'Response copied to clipboard.',
     })
   }
-
+  
   const handleBookmark = () => {
-    toast({
-      description: 'Tip saved to Library (feature coming soon!).',
-    })
+    onSave(message)
   }
 
   return (

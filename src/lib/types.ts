@@ -6,3 +6,9 @@ export interface Message {
   content: string
   threatData?: ThreatExplainerOutput
 }
+
+export interface SavedItem {
+  id: string
+  savedAt: string
+  message: Message
+}
