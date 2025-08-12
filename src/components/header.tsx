@@ -1,7 +1,6 @@
 'use client'
 
 import { SidebarTrigger } from '@/components/ui/sidebar'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,8 +12,7 @@ import {
 import { Button } from './ui/button'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { Badge } from './ui/badge'
-import { CheckCircle } from 'lucide-react'
+import { Logo } from './icons/logo'
 
 export function Header() {
   const pathname = usePathname()
@@ -37,15 +35,7 @@ export function Header() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="rounded-full">
-             <div className="relative">
-                <Avatar>
-                  <AvatarImage src="https://placehold.co/32x32.png" alt="User Avatar" data-ai-hint="person avatar" />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-                <Badge variant="secondary" className="absolute -bottom-1 -right-2 p-0.5 border-2 border-background">
-                    <CheckCircle className="w-3 h-3 text-green-600" />
-                </Badge>
-             </div>
+            <Logo className="w-8 h-8" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
