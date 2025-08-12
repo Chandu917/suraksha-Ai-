@@ -47,7 +47,7 @@ export function AppSidebar() {
               <Logo className="size-6 text-primary" />
             </span>
           </Button>
-          <span className="text-lg font-semibold">SurakshaAI</span>
+          <span className="text-lg font-semibold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">SurakshaAI</span>
         </Link>
       </SidebarHeader>
 

@@ -107,8 +107,8 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
         className={cn(
           'flex max-w-xl flex-col gap-2 rounded-lg p-4',
           isUser
-            ? 'rounded-br-none bg-gradient-to-br from-primary to-secondary text-primary-foreground'
-            : 'rounded-bl-none border border-border/20 bg-muted/40'
+            ? 'rounded-br-none bg-gradient-to-br from-purple-600 to-blue-600 text-primary-foreground'
+            : 'rounded-bl-none border border-border/50 bg-muted/50'
         )}
       >
         <div className="prose-sm prose-neutral dark:prose-invert whitespace-pre-wrap break-words">
@@ -118,7 +118,7 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
                     <AccordionItem value="threat">
                         <AccordionTrigger className="font-semibold text-base">
                             <div className="flex items-center gap-2">
-                                <ShieldCheck className="h-5 w-5 text-primary" />
+                                <ShieldCheck className="h-5 w-5 text-purple-400" />
                                 Threat / Issue
                             </div>
                         </AccordionTrigger>
@@ -129,7 +129,7 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
                     <AccordionItem value="steps">
                         <AccordionTrigger className="font-semibold text-base">
                             <div className="flex items-center gap-2">
-                                <ListOrdered className="h-5 w-5 text-primary" />
+                                <ListOrdered className="h-5 w-5 text-purple-400" />
                                 Steps to Fix
                             </div>
                         </AccordionTrigger>
@@ -140,7 +140,7 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
                     <AccordionItem value="precautions">
                         <AccordionTrigger className="font-semibold text-base">
                             <div className="flex items-center gap-2">
-                                <AlertCircle className="h-5 w-5 text-primary" />
+                                <AlertCircle className="h-5 w-5 text-purple-400" />
                                 Precautions
                             </div>
                         </AccordionTrigger>
@@ -151,7 +151,7 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
                     <AccordionItem value="laws">
                         <AccordionTrigger className="font-semibold text-base">
                              <div className="flex items-center gap-2">
-                                <IndianRupee className="h-5 w-5 text-primary" />
+                                <Landmark className="h-5 w-5 text-purple-400" />
                                 Relevant Indian Laws
                             </div>
                         </AccordionTrigger>
@@ -185,7 +185,7 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
         )}
       </div>
       {isUser && (
-        <Avatar className="flex h-10 w-10 items-center justify-center rounded-full border">
+        <Avatar className="flex h-10 w-10 items-center justify-center rounded-full border border-border">
           <AvatarImage src="https://placehold.co/40x40.png" alt="User" data-ai-hint="person avatar" />
           <AvatarFallback>
             <User className="h-5 w-5" />

@@ -53,14 +53,14 @@ export function ChatInputForm({ onSubmit, isLoading, clearChat }: ChatInputFormP
             onChange={e => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask about a phishing email, a suspicious link, or Indian cyber laws..."
-            className="min-h-[48px] resize-none rounded-2xl border-2 border-border/20 bg-muted/40 pr-16 shadow-sm"
+            className="min-h-[48px] resize-none rounded-2xl border-2 border-border/80 bg-muted/80 pr-16 shadow-sm focus:border-primary/50"
             rows={1}
             disabled={isLoading}
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button type="submit" size="icon" className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-secondary text-primary-foreground" disabled={isLoading || !input.trim()}>
+                <Button type="submit" size="icon" className="h-8 w-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 text-white" disabled={isLoading || !input.trim()}>
                   <SendHorizonal className="h-4 w-4" />
                   <span className="sr-only">Send</span>
                 </Button>
