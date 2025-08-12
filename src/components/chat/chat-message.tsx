@@ -7,6 +7,7 @@ import { Shield, User, Copy, Bookmark, AlertTriangle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
 import { Fragment, useEffect, useState } from 'react'
+import { Logo } from '../icons/logo'
 
 interface ChatMessageProps {
   message: Message,
@@ -57,7 +58,7 @@ function renderContentWithLinks(content: string) {
             href={part}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary underline hover:opacity-80"
+            className="text-blue-400 underline hover:opacity-80"
           >
             {part}
           </a>
@@ -91,16 +92,16 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
   return (
     <div className={cn('flex items-start gap-4', isUser && 'justify-end')}>
       {!isUser && (
-        <Avatar className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-primary/10 text-primary">
-          <Shield className="h-5 w-5" />
+        <Avatar className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/50 bg-background">
+          <Logo className="h-6 w-6" />
         </Avatar>
       )}
       <div
         className={cn(
           'flex max-w-xl flex-col gap-2 rounded-lg p-4',
           isUser
-            ? 'rounded-br-none bg-primary text-primary-foreground'
-            : 'rounded-bl-none border bg-card'
+            ? 'rounded-br-none bg-gradient-to-br from-primary to-secondary text-primary-foreground'
+            : 'rounded-bl-none border border-border/20 bg-muted/40'
         )}
       >
         <div className="prose-sm prose-neutral dark:prose-invert whitespace-pre-wrap break-words">

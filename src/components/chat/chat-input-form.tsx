@@ -3,7 +3,7 @@
 import { useState, useRef, type FormEvent } from 'react'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { SendHorizonal, Plus, Trash2 } from 'lucide-react'
+import { SendHorizonal, Plus, Trash2, Sparkles } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
 
 interface ChatInputFormProps {
@@ -38,7 +38,7 @@ export function ChatInputForm({ onSubmit, isLoading, clearChat }: ChatInputFormP
       >
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button type="button" size="icon" variant="ghost" className="shrink-0" onClick={clearChat} disabled={isLoading}>
+            <Button type="button" size="icon" variant="outline" className="shrink-0" onClick={clearChat} disabled={isLoading}>
               <Trash2 className="h-5 w-5" />
               <span className="sr-only">New Chat</span>
             </Button>
@@ -53,14 +53,14 @@ export function ChatInputForm({ onSubmit, isLoading, clearChat }: ChatInputFormP
             onChange={e => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Ask about a phishing email, a suspicious link, or Indian cyber laws..."
-            className="min-h-[48px] resize-none rounded-2xl border-2 border-input pr-16 shadow-sm"
+            className="min-h-[48px] resize-none rounded-2xl border-2 border-border/20 bg-muted/40 pr-16 shadow-sm"
             rows={1}
             disabled={isLoading}
           />
           <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
             <Tooltip>
               <TooltipTrigger asChild>
-                <Button type="submit" size="icon" className="h-8 w-8 rounded-full" disabled={isLoading || !input.trim()}>
+                <Button type="submit" size="icon" className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-secondary text-primary-foreground" disabled={isLoading || !input.trim()}>
                   <SendHorizonal className="h-4 w-4" />
                   <span className="sr-only">Send</span>
                 </Button>

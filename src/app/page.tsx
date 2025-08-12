@@ -1,15 +1,14 @@
-
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ShieldCheck, Microscope, Landmark, BotMessageSquare, Link2 } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Microscope, Landmark, BotMessageSquare, Link2, Sparkles } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-dvh bg-background text-foreground">
-      <header className="sticky top-0 z-50 flex items-center justify-between h-16 px-4 md:px-6 border-b bg-background/95 backdrop-blur-sm">
+      <header className="sticky top-0 z-50 flex items-center justify-between h-16 px-4 md:px-6 border-b border-border/10 bg-background/80 backdrop-blur-sm">
         <Link href="/" className="flex items-center gap-2">
-          <Logo className="w-8 h-8 text-primary" />
+          <Logo className="w-8 h-8" />
           <span className="text-xl font-bold">SurakshaAI</span>
         </Link>
         <Button asChild variant="ghost">
@@ -21,19 +20,21 @@ export default function LandingPage() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative w-full pt-24 pb-32 md:pt-32 md:pb-40">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 -z-10"></div>
+        <section className="relative w-full pt-24 pb-32 md:pt-32 md:pb-40 overflow-hidden">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200%] h-[200%] -z-10 bg-gradient-radial from-primary/20 via-secondary/10 to-transparent"></div>
           <div className="container px-4 md:px-6 text-center">
             <div className="flex flex-col items-center space-y-6">
-              <BotMessageSquare className="w-20 h-20 text-primary animate-pulse" />
-              <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-foreground">
-                India's AI Guardian for Cyber Safety
+              <div className="p-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 shadow-lg">
+                <Sparkles className="w-16 h-16 text-transparent bg-clip-text bg-gradient-to-br from-primary to-secondary" />
+              </div>
+              <h1 className="text-4xl font-extrabold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-br from-gray-200 to-gray-500">
+                Your AI Guardian for a Safer Digital India
               </h1>
               <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl">
-                Instantly analyze suspicious messages, scan URLs, and learn about your legal rights under Indian law. Your digital world, secured.
+                Harnessing the power of advanced AI to protect your digital life. Analyze threats, secure your identity, and understand your rights.
               </p>
               <div className="flex flex-col gap-4 min-[400px]:flex-row">
-                <Button asChild size="lg" className="shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-shadow">
+                <Button asChild size="lg" className="bg-gradient-to-r from-primary to-secondary text-primary-foreground shadow-lg hover:opacity-90 transition-opacity">
                   <Link href="/chat">
                     Get Free Analysis
                     <ArrowRight className="w-5 h-5 ml-2" />
@@ -41,7 +42,7 @@ export default function LandingPage() {
                 </Button>
                 <Button asChild size="lg" variant="outline">
                   <Link href="#features">
-                    Learn More
+                    Explore Features
                   </Link>
                 </Button>
               </div>
@@ -50,38 +51,38 @@ export default function LandingPage() {
         </section>
 
         {/* Features Section */}
-        <section id="features" className="w-full py-16 md:py-24 bg-secondary/10">
+        <section id="features" className="w-full py-16 md:py-24 bg-background/50">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-              <div className="inline-block px-4 py-1 text-sm font-semibold rounded-full bg-primary text-primary-foreground">Key Features</div>
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Your Digital Shield, Simplified</h2>
+              <div className="inline-block px-4 py-1 text-sm font-semibold rounded-full bg-gradient-to-r from-primary to-secondary text-primary-foreground">Key Features</div>
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Your Proactive Digital Shield</h2>
               <p className="max-w-3xl mx-auto text-muted-foreground md:text-xl/relaxed">
-                From identifying phishing scams to explaining legal recourse, we've got you covered.
+                From identifying sophisticated scams to providing legal clarity, we empower you.
               </p>
             </div>
             <div className="grid max-w-6xl gap-8 mx-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-               <div className="p-6 text-center transition-transform duration-300 transform bg-background rounded-xl shadow-lg hover:scale-105">
+               <div className="p-6 text-center transition-transform duration-300 transform bg-muted/30 rounded-xl shadow-lg hover:scale-105 hover:shadow-primary/20">
                 <ShieldCheck className="w-12 h-12 mx-auto mb-4 text-primary" />
                 <h3 className="text-2xl font-bold">Instant Threat Analysis</h3>
                 <p className="mt-2 text-muted-foreground">
                   Paste a suspicious message to get an immediate, clear explanation of the potential threat.
                 </p>
               </div>
-               <div className="p-6 text-center transition-transform duration-300 transform bg-background rounded-xl shadow-lg hover:scale-105">
+               <div className="p-6 text-center transition-transform duration-300 transform bg-muted/30 rounded-xl shadow-lg hover:scale-105 hover:shadow-primary/20">
                 <Link2 className="w-12 h-12 mx-auto mb-4 text-primary" />
                 <h3 className="text-2xl font-bold">URL Scanner</h3>
                 <p className="mt-2 text-muted-foreground">
                   Check if a link is safe before you click. Analyze URLs for phishing, malware, and other dangers.
                 </p>
               </div>
-              <div className="p-6 text-center transition-transform duration-300 transform bg-background rounded-xl shadow-lg hover:scale-105">
+              <div className="p-6 text-center transition-transform duration-300 transform bg-muted/30 rounded-xl shadow-lg hover:scale-105 hover:shadow-primary/20">
                 <Microscope className="w-12 h-12 mx-auto mb-4 text-primary" />
                 <h3 className="text-2xl font-bold">Actionable Safety Steps</h3>
                 <p className="mt-2 text-muted-foreground">
                   Receive easy-to-follow steps to secure your accounts and devices after a potential breach.
                 </p>
               </div>
-              <div className="p-6 text-center transition-transform duration-300 transform bg-background rounded-xl shadow-lg hover:scale-105">
+              <div className="p-6 text-center transition-transform duration-300 transform bg-muted/30 rounded-xl shadow-lg hover:scale-105 hover:shadow-primary/20">
                 <Landmark className="w-12 h-12 mx-auto mb-4 text-primary" />
                 <h3 className="text-2xl font-bold">Indian Legal Guide</h3>
                 <p className="mt-2 text-muted-foreground">
@@ -92,44 +93,15 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* How It Works Section */}
-        <section className="w-full py-16 md:py-24 flex items-center justify-center">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-12">
-               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Get Clarity in 3 Simple Steps</h2>
-            </div>
-            <div className="relative grid max-w-3xl gap-12 mx-auto md:grid-cols-3">
-               <div className="absolute w-full h-1 bg-border top-1/2 -translate-y-1/2 left-0 md:block hidden"></div>
-                <div className="relative flex flex-col items-center text-center">
-                  <div className="absolute w-1 h-full bg-border left-1/2 -translate-x-1/2 top-0 md:hidden"></div>
-                  <div className="flex items-center justify-center w-16 h-16 text-2xl font-bold border-2 rounded-full bg-background border-primary text-primary z-10">1</div>
-                  <h3 className="mt-4 text-xl font-semibold">Submit Your Query</h3>
-                  <p className="mt-1 text-muted-foreground">Copy and paste the text or link you're unsure about.</p>
-                </div>
-                 <div className="relative flex flex-col items-center text-center">
-                  <div className="absolute w-1 h-full bg-border left-1/2 -translate-x-1/2 top-0 md:hidden"></div>
-                  <div className="flex items-center justify-center w-16 h-16 text-2xl font-bold border-2 rounded-full bg-background border-primary text-primary z-10">2</div>
-                  <h3 className="mt-4 text-xl font-semibold">AI Analysis</h3>
-                  <p className="mt-1 text-muted-foreground">Our AI analyzes it for threats, scams, and legal context.</p>
-                </div>
-                 <div className="relative flex flex-col items-center text-center">
-                  <div className="flex items-center justify-center w-16 h-16 text-2xl font-bold border-2 rounded-full bg-background border-primary text-primary z-10">3</div>
-                  <h3 className="mt-4 text-xl font-semibold">Receive Your Report</h3>
-                  <p className="mt-1 text-muted-foreground">Get a clear, concise report with actionable advice.</p>
-                </div>
-            </div>
-          </div>
-        </section>
-
         {/* Final CTA Section */}
-        <section className="w-full py-16 text-white md:py-24 bg-gradient-to-r from-primary to-blue-700">
+        <section className="w-full py-16 text-white md:py-24 bg-gradient-to-r from-primary to-secondary">
             <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
                 <div className="space-y-3">
-                    <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Feeling Unsure? Get a Second Opinion.</h2>
-                    <p className="mx-auto max-w-xl text-primary-foreground/80">Don't risk your security. A quick check can provide peace of mind.</p>
+                    <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">Take Control of Your Digital Safety</h2>
+                    <p className="mx-auto max-w-xl text-primary-foreground/80">Don't leave your security to chance. A quick, free check can provide peace of mind and prevent trouble.</p>
                 </div>
                 <div className="mx-auto w-full max-w-sm space-y-2">
-                    <Button asChild size="lg" variant="secondary" className="text-secondary-foreground bg-secondary hover:bg-secondary/90">
+                    <Button asChild size="lg" variant="secondary" className="bg-white text-primary hover:bg-gray-200">
                         <Link href="/chat">
                             Chat with SurakshaAI Now
                         </Link>
@@ -140,7 +112,7 @@ export default function LandingPage() {
 
       </main>
 
-      <footer className="flex flex-col items-center justify-center w-full h-24 gap-2 px-4 border-t shrink-0 md:px-6 bg-secondary/10">
+      <footer className="flex flex-col items-center justify-center w-full h-24 gap-2 px-4 border-t shrink-0 md:px-6 bg-background/50 border-border/10">
         <p className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} SurakshaAI. All rights reserved.</p>
       </footer>
     </div>

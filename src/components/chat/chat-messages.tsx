@@ -5,7 +5,7 @@ import { ChatMessage } from '@/components/chat/chat-message'
 import { useEffect, useRef } from 'react'
 import { Skeleton } from '../ui/skeleton'
 import { Avatar } from '../ui/avatar'
-import { Shield } from 'lucide-react'
+import { Logo } from '../icons/logo'
 
 interface ChatMessagesProps {
   messages: Message[]
@@ -30,8 +30,8 @@ export function ChatMessages({ messages, isLoading, onSaveMessage }: ChatMessage
         ))}
         {isLoading && (
           <div className="flex items-start gap-4">
-            <Avatar className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border bg-primary/10 text-primary">
-              <Shield className="h-5 w-5" />
+            <Avatar className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/50 bg-background">
+              <Logo className="h-6 w-6 animate-spin" />
             </Avatar>
             <div className="w-full space-y-2">
               <Skeleton className="h-4 w-1/2" />
