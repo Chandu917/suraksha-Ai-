@@ -11,19 +11,21 @@ import {
 } from '@/components/ui/sidebar'
 import { Logo } from '@/components/icons/logo'
 import {
-  Home,
+  MessageSquare,
   BookText,
   Search,
   Settings,
   LogOut,
   LogIn,
+  Home,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from './ui/button'
 
 const menuItems = [
-  { href: '/', label: 'Chat', icon: Home },
+  { href: '/', label: 'Home', icon: Home },
+  { href: '/chat', label: 'Chat', icon: MessageSquare },
   { href: '/library', label: 'Library', icon: BookText },
   { href: '/search', label: 'Search', icon: Search },
   { href: '/settings', label: 'Settings', icon: Settings },
