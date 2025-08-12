@@ -3,7 +3,7 @@
 import { type Message } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Shield, User, Copy, Bookmark, AlertTriangle, FileText, Bot, ShieldCheck, ListOrdered, AlertCircle, IndianRupee } from 'lucide-react'
+import { Shield, User, Copy, Bookmark, AlertTriangle, FileText, Bot, ShieldCheck, ListOrdered, AlertCircle, Landmark } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
 import { Fragment, useEffect, useState } from 'react'
@@ -107,7 +107,7 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
         className={cn(
           'flex max-w-xl flex-col gap-2 rounded-lg p-4',
           isUser
-            ? 'rounded-br-none bg-gradient-to-br from-purple-600 to-blue-600 text-primary-foreground'
+            ? 'rounded-br-none bg-primary text-primary-foreground'
             : 'rounded-bl-none border border-border/50 bg-muted/50'
         )}
       >
@@ -118,7 +118,7 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
                     <AccordionItem value="threat">
                         <AccordionTrigger className="font-semibold text-base">
                             <div className="flex items-center gap-2">
-                                <ShieldCheck className="h-5 w-5 text-purple-400" />
+                                <ShieldCheck className="h-5 w-5 text-primary" />
                                 Threat / Issue
                             </div>
                         </AccordionTrigger>
@@ -129,7 +129,7 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
                     <AccordionItem value="steps">
                         <AccordionTrigger className="font-semibold text-base">
                             <div className="flex items-center gap-2">
-                                <ListOrdered className="h-5 w-5 text-purple-400" />
+                                <ListOrdered className="h-5 w-5 text-primary" />
                                 Steps to Fix
                             </div>
                         </AccordionTrigger>
@@ -140,7 +140,7 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
                     <AccordionItem value="precautions">
                         <AccordionTrigger className="font-semibold text-base">
                             <div className="flex items-center gap-2">
-                                <AlertCircle className="h-5 w-5 text-purple-400" />
+                                <AlertCircle className="h-5 w-5 text-primary" />
                                 Precautions
                             </div>
                         </AccordionTrigger>
@@ -151,7 +151,7 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
                     <AccordionItem value="laws">
                         <AccordionTrigger className="font-semibold text-base">
                              <div className="flex items-center gap-2">
-                                <Landmark className="h-5 w-5 text-purple-400" />
+                                <Landmark className="h-5 w-5 text-primary" />
                                 Relevant Indian Laws
                             </div>
                         </AccordionTrigger>
