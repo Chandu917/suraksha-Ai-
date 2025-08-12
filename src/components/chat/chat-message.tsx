@@ -3,11 +3,18 @@
 import { type Message } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Shield, User, Copy, Bookmark, AlertTriangle } from 'lucide-react'
+import { Shield, User, Copy, Bookmark, AlertTriangle, FileText, Bot, ShieldCheck, ListOrdered, AlertCircle, IndianRupee } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
 import { Fragment, useEffect, useState } from 'react'
 import { Logo } from '../icons/logo'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
 
 interface ChatMessageProps {
   message: Message,
@@ -74,7 +81,7 @@ function renderContentWithLinks(content: string) {
 
 export function ChatMessage({ message, onSave }: ChatMessageProps) {
   const { toast } = useToast()
-  const [isTyping, setIsTyping] = useState(message.role === 'assistant')
+  const [isTyping, setIsTyping] = useState(message.role === 'assistant' && !message.threatData)
 
   const isUser = message.role === 'user'
   
@@ -106,35 +113,56 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
       >
         <div className="prose-sm prose-neutral dark:prose-invert whitespace-pre-wrap break-words">
           {message.threatData ? (
-            <>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="mb-2 flex items-center gap-2 font-semibold font-headline">
-                    <span className="text-2xl">🛡</span> Threat / Issue
-                  </h3>
-                  <p>{message.threatData.threat}</p>
-                </div>
-                <div>
-                  <h3 className="mb-2 flex items-center gap-2 font-semibold font-headline">
-                    <span className="text-2xl">⚙️</span> Steps to Fix
-                  </h3>
-                  <p>{message.threatData.stepsToFix}</p>
-                </div>
-                <div>
-                  <h3 className="mb-2 flex items-center gap-2 font-semibold font-headline">
-                    <span className="text-2xl">🚨</span> Precautions
-                  </h3>
-                  <p>{message.threatData.precautions}</p>
-                </div>
-                <div>
-                  <h3 className="mb-2 flex items-center gap-2 font-semibold font-headline">
-                    <span className="text-2xl">📜</span> Relevant Indian Laws
-                  </h3>
-                  <p className="font-code">{message.threatData.relevantIndianLaws}</p>
-                </div>
-              </div>
-              <p className="mt-4 font-medium">Stay safe online! 🛡</p>
-            </>
+            <div className="w-full">
+                <Accordion type="multiple" defaultValue={['threat', 'steps']} className="w-full">
+                    <AccordionItem value="threat">
+                        <AccordionTrigger className="font-semibold text-base">
+                            <div className="flex items-center gap-2">
+                                <ShieldCheck className="h-5 w-5 text-primary" />
+                                Threat / Issue
+                            </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                           {message.threatData.threat}
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="steps">
+                        <AccordionTrigger className="font-semibold text-base">
+                            <div className="flex items-center gap-2">
+                                <ListOrdered className="h-5 w-5 text-primary" />
+                                Steps to Fix
+                            </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            {message.threatData.stepsToFix}
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="precautions">
+                        <AccordionTrigger className="font-semibold text-base">
+                            <div className="flex items-center gap-2">
+                                <AlertCircle className="h-5 w-5 text-primary" />
+                                Precautions
+                            </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                           {message.threatData.precautions}
+                        </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="laws">
+                        <AccordionTrigger className="font-semibold text-base">
+                             <div className="flex items-center gap-2">
+                                <IndianRupee className="h-5 w-5 text-primary" />
+                                Relevant Indian Laws
+                            </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            <p className="font-code">{message.threatData.relevantIndianLaws}</p>
+                        </AccordionContent>
+                    </AccordionItem>
+                </Accordion>
+                <p className="mt-4 text-center font-medium">Stay safe online! 🛡</p>
+            </div>
+
           ) : isUser ? (
             renderContentWithLinks(message.content)
           ) : isTyping ? (
