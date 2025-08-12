@@ -3,6 +3,8 @@
 import { detectMode } from '@/ai/flows/mode-detection'
 import { threatExplainer } from '@/ai/flows/threat-explainer'
 import { scanUrl } from '@/ai/flows/url-scanner'
+import { checkPasswordStrength } from '@/ai/flows/password-strength-checker'
+import { type PasswordStrengthInput, type PasswordStrengthOutput } from '@/ai/flows/password-strength-checker'
 import { type ScanUrlInput, type ScanUrlOutput } from '@/ai/schemas/url-scanner'
 import { type Message } from '@/lib/types'
 
@@ -89,4 +91,18 @@ export async function getUrlScanResponse(input: ScanUrlInput): Promise<ScanUrlOu
       report: 'Sorry, I encountered an error while scanning the URL. Please try again later.',
     };
   }
+}
+
+export async function getPasswordStrengthResponse(input: PasswordStrengthInput): Promise<PasswordStrengthOutput> {
+    try {
+        return await checkPasswordStrength(input);
+    } catch (error) {
+        console.error('Error getting password strength response:', error);
+        return {
+            score: 0,
+            strength: 'Very Weak',
+            suggestions: ['Could not analyze password due to an error.'],
+            feedback: 'Sorry, I encountered an error while analyzing the password. Please try again later.',
+        };
+    }
 }
