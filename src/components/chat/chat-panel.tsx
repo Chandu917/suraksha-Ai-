@@ -96,15 +96,17 @@ export function ChatPanel() {
   }
 
   return (
-    <div className="relative flex h-full flex-col">
+    <div className="relative flex h-full flex-col bg-background">
       <div className="flex-1 overflow-y-auto">
-        {messages.length > 0 ? (
-          <ChatMessages messages={messages} isLoading={isLoading} onSaveMessage={saveToLibrary} />
-        ) : (
-          <EmptyScreen onSelectPrompt={handleSendMessage} />
-        )}
+        <div className="mx-auto max-w-3xl h-full">
+          {messages.length > 0 ? (
+            <ChatMessages messages={messages} isLoading={isLoading} onSaveMessage={saveToLibrary} />
+          ) : (
+            <EmptyScreen onSelectPrompt={handleSendMessage} />
+          )}
+        </div>
       </div>
-      <div className="mt-auto border-t bg-background p-4">
+      <div className="mt-auto p-4 bg-background">
         <ChatInputForm onSubmit={handleSendMessage} isLoading={isLoading} clearChat={clearChat} />
       </div>
     </div>

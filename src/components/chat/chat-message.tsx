@@ -105,10 +105,10 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
       )}
       <div
         className={cn(
-          'flex max-w-xl flex-col gap-2 rounded-2xl p-4 shadow-sm',
+          'flex max-w-xl flex-col gap-2 rounded-2xl px-4 py-3 shadow-sm',
           isUser
-            ? 'rounded-br-none bg-gradient-to-br from-primary to-primary/90 text-primary-foreground'
-            : 'rounded-bl-none border border-border/40 bg-card text-card-foreground shadow-sm'
+            ? 'rounded-br-none bg-primary text-primary-foreground'
+            : 'rounded-bl-none bg-transparent px-0 shadow-none'
         )}
       >
         <div className="prose-sm prose-neutral dark:prose-invert whitespace-pre-wrap break-words">
