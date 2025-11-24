@@ -4,6 +4,7 @@ import { detectMode } from '@/ai/flows/mode-detection'
 import { threatExplainer } from '@/ai/flows/threat-explainer'
 import { scanUrl } from '@/ai/flows/url-scanner'
 import { checkPasswordStrength } from '@/ai/flows/password-strength-checker'
+import { generalChat } from '@/ai/flows/general-chat'
 import { type PasswordStrengthInput, type PasswordStrengthOutput } from '@/ai/flows/password-strength-checker'
 import { type ScanUrlInput, type ScanUrlOutput } from '@/ai/schemas/url-scanner'
 import { type Message } from '@/lib/types'
@@ -60,20 +61,26 @@ export async function getAiResponse(history: Message[]): Promise<Message> {
           content: "It sounds like you're dealing with a security concern. I'm here to help. Please describe the situation in as much detail as you can. For example, you can paste the full text of a suspicious email, SMS, or share a link you're worried about. The more information you provide, the better I can assist you.",
         }
 
+      case 'GeneralChat':
       case 'Unknown':
-      default:
+      case 'Greeting': // Greeting can also be handled by general chat for more variety
+        const chatResponse = await generalChat({
+          userInput: lastUserMessage.content,
+          history: history.map(m => ({ role: m.role, content: m.content }))
+        })
         return {
           id,
           role: 'assistant',
-          content: "I'm not quite sure how to respond to that. I specialize in cybersecurity and Indian cyber laws. Could you try rephrasing, or ask me about a security topic?",
+          content: chatResponse.response,
         }
     }
   } catch (error) {
     console.error('Error getting AI response:', error);
+    // Check if it's a specific Genkit error or API error if possible, otherwise generic
     return {
       id,
       role: 'assistant',
-      content: 'Sorry, I encountered an error while processing your request. Please try again later.',
+      content: 'I apologize, but I encountered a temporary issue connecting to my AI brain. Please check your internet connection or try again in a moment.',
     };
   }
 }
@@ -94,15 +101,15 @@ export async function getUrlScanResponse(input: ScanUrlInput): Promise<ScanUrlOu
 }
 
 export async function getPasswordStrengthResponse(input: PasswordStrengthInput): Promise<PasswordStrengthOutput> {
-    try {
-        return await checkPasswordStrength(input);
-    } catch (error) {
-        console.error('Error getting password strength response:', error);
-        return {
-            score: 0,
-            strength: 'Very Weak',
-            suggestions: ['Could not analyze password due to an error.'],
-            feedback: 'Sorry, I encountered an error while analyzing the password. Please try again later.',
-        };
-    }
+  try {
+    return await checkPasswordStrength(input);
+  } catch (error) {
+    console.error('Error getting password strength response:', error);
+    return {
+      score: 0,
+      strength: 'Very Weak',
+      suggestions: ['Could not analyze password due to an error.'],
+      feedback: 'Sorry, I encountered an error while analyzing the password. Please try again later.',
+    };
+  }
 }

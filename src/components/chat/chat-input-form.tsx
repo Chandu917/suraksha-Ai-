@@ -6,6 +6,18 @@ import { Button } from '@/components/ui/button'
 import { SendHorizonal, Plus, Trash2, Sparkles } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 interface ChatInputFormProps {
   onSubmit: (input: string) => Promise<void>
   isLoading: boolean
@@ -36,16 +48,32 @@ export function ChatInputForm({ onSubmit, isLoading, clearChat }: ChatInputFormP
         onSubmit={handleSubmit}
         className="relative flex w-full max-w-3xl mx-auto items-start gap-4"
       >
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button type="button" size="icon" variant="outline" className="shrink-0" onClick={clearChat} disabled={isLoading}>
-              <Trash2 className="h-5 w-5" />
-              <span className="sr-only">New Chat</span>
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="top">Clear Chat</TooltipContent>
-        </Tooltip>
-        
+        <AlertDialog>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <AlertDialogTrigger asChild>
+                <Button type="button" size="icon" variant="outline" className="shrink-0" disabled={isLoading}>
+                  <Trash2 className="h-5 w-5" />
+                  <span className="sr-only">New Chat</span>
+                </Button>
+              </AlertDialogTrigger>
+            </TooltipTrigger>
+            <TooltipContent side="top">Clear Chat</TooltipContent>
+          </Tooltip>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This will clear your current chat history. This action cannot be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={clearChat}>Continue</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
         <div className="relative flex-1">
           <Textarea
             ref={inputRef}

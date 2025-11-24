@@ -84,14 +84,14 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
   const [isTyping, setIsTyping] = useState(message.role === 'assistant' && !message.threatData)
 
   const isUser = message.role === 'user'
-  
+
   const handleCopy = () => {
     navigator.clipboard.writeText(message.content)
     toast({
       description: 'Response copied to clipboard.',
     })
   }
-  
+
   const handleBookmark = () => {
     onSave(message)
   }
@@ -105,62 +105,62 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
       )}
       <div
         className={cn(
-          'flex max-w-xl flex-col gap-2 rounded-lg p-4',
+          'flex max-w-xl flex-col gap-2 rounded-2xl p-4 shadow-sm',
           isUser
-            ? 'rounded-br-none bg-primary text-primary-foreground'
-            : 'rounded-bl-none border border-border/50 bg-muted/50'
+            ? 'rounded-br-none bg-gradient-to-br from-primary to-primary/90 text-primary-foreground'
+            : 'rounded-bl-none border border-border/40 bg-card text-card-foreground shadow-sm'
         )}
       >
         <div className="prose-sm prose-neutral dark:prose-invert whitespace-pre-wrap break-words">
           {message.threatData ? (
             <div className="w-full">
-                <Accordion type="multiple" defaultValue={['threat', 'steps']} className="w-full">
-                    <AccordionItem value="threat">
-                        <AccordionTrigger className="font-semibold text-base">
-                            <div className="flex items-center gap-2">
-                                <ShieldCheck className="h-5 w-5 text-primary" />
-                                Threat / Issue
-                            </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                           {message.threatData.threat}
-                        </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="steps">
-                        <AccordionTrigger className="font-semibold text-base">
-                            <div className="flex items-center gap-2">
-                                <ListOrdered className="h-5 w-5 text-primary" />
-                                Steps to Fix
-                            </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                            {message.threatData.stepsToFix}
-                        </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="precautions">
-                        <AccordionTrigger className="font-semibold text-base">
-                            <div className="flex items-center gap-2">
-                                <AlertCircle className="h-5 w-5 text-primary" />
-                                Precautions
-                            </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                           {message.threatData.precautions}
-                        </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="laws">
-                        <AccordionTrigger className="font-semibold text-base">
-                             <div className="flex items-center gap-2">
-                                <Landmark className="h-5 w-5 text-primary" />
-                                Relevant Indian Laws
-                            </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                            <p className="font-code">{message.threatData.relevantIndianLaws}</p>
-                        </AccordionContent>
-                    </AccordionItem>
-                </Accordion>
-                <p className="mt-4 text-center font-medium">Stay safe online! 🛡</p>
+              <Accordion type="multiple" defaultValue={['threat', 'steps']} className="w-full">
+                <AccordionItem value="threat">
+                  <AccordionTrigger className="font-semibold text-base">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="h-5 w-5 text-primary" />
+                      Threat / Issue
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {message.threatData.threat}
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="steps">
+                  <AccordionTrigger className="font-semibold text-base">
+                    <div className="flex items-center gap-2">
+                      <ListOrdered className="h-5 w-5 text-primary" />
+                      Steps to Fix
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {message.threatData.stepsToFix}
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="precautions">
+                  <AccordionTrigger className="font-semibold text-base">
+                    <div className="flex items-center gap-2">
+                      <AlertCircle className="h-5 w-5 text-primary" />
+                      Precautions
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    {message.threatData.precautions}
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="laws">
+                  <AccordionTrigger className="font-semibold text-base">
+                    <div className="flex items-center gap-2">
+                      <Landmark className="h-5 w-5 text-primary" />
+                      Relevant Indian Laws
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <p className="font-code">{message.threatData.relevantIndianLaws}</p>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+              <p className="mt-4 text-center font-medium">Stay safe online! 🛡</p>
             </div>
 
           ) : isUser ? (

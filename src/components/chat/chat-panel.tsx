@@ -43,11 +43,22 @@ export function ChatPanel() {
     setMessages(newMessages)
     setIsLoading(true)
 
-    const aiMessage = await getAiResponse(newMessages)
-    setMessages(prev => [...prev, aiMessage])
-    setIsLoading(false)
+    try {
+      const aiMessage = await getAiResponse(newMessages)
+      setMessages(prev => [...prev, aiMessage])
+    } catch (error) {
+      console.error("Failed to get AI response", error)
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Failed to get a response from SurakshaAI. Please try again.',
+      })
+      // Optionally remove the user message if it failed, or keep it to allow retry
+    } finally {
+      setIsLoading(false)
+    }
   }
-  
+
   const clearChat = () => {
     setMessages([])
     localStorage.removeItem('suraksha-chat-history')
@@ -56,20 +67,20 @@ export function ChatPanel() {
   const saveToLibrary = (message: Message) => {
     try {
       const savedItems: SavedItem[] = JSON.parse(localStorage.getItem('suraksha-library-items') || '[]')
-      
+
       if (savedItems.some(item => item.message.id === message.id)) {
         toast({
           description: "This message is already in your Library.",
         })
         return
       }
-      
+
       const newItem: SavedItem = {
         id: crypto.randomUUID(),
         savedAt: new Date().toISOString(),
         message: message,
       }
-      
+
       const updatedItems = [newItem, ...savedItems]
       localStorage.setItem('suraksha-library-items', JSON.stringify(updatedItems))
       toast({

@@ -5,7 +5,6 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
-<<<<<<< Updated upstream
   metadataBase: new URL('https://suraksha-ai.app'), // Replace with your actual domain
   title: {
     default: 'SurakshaAI: Your AI Cybersecurity Guardian for India',
@@ -34,32 +33,6 @@ export const metadata: Metadata = {
     title: 'SurakshaAI: AI Cybersecurity Guardian for India',
     description: 'Stay safe online with AI-powered threat analysis and Indian cyber law guidance.',
      images: ['/twitter-image.png'], // You would need to create this image
-=======
-  title: 'SurakshaAI - Your AI Cybersecurity Guardian',
-  description: 'Protect your digital life with AI-powered threat detection, password analysis, and legal guidance. Your friendly Indian cybersecurity & legal assistant.',
-  keywords: 'cybersecurity, AI security, threat detection, password checker, legal assistant, Indian cybersecurity, SurakshaAI',
-  authors: [{ name: 'SurakshaAI Team' }],
-  openGraph: {
-    title: 'SurakshaAI - Your AI Cybersecurity Guardian',
-    description: 'Protect your digital life with AI-powered threat detection, password analysis, and legal guidance.',
-    url: 'https://suraksha-ai.vercel.app',
-    siteName: 'SurakshaAI',
-    images: [
-      {
-        url: 'https://suraksha-ai.vercel.app/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'SurakshaAI - AI Cybersecurity Assistant',
-      },
-    ],
-    locale: 'en_IN',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'SurakshaAI - Your AI Cybersecurity Guardian',
-    description: 'Protect your digital life with AI-powered threat detection, password analysis, and legal guidance.',
-    images: ['https://suraksha-ai.vercel.app/og-image.png'],
   },
   robots: {
     index: true,
@@ -71,7 +44,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
->>>>>>> Stashed changes
   },
 };
 

@@ -9,8 +9,8 @@
  * - DetectModeOutput - The return type for the detectMode function.
  */
 
-import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { ai } from '@/ai/genkit';
+import { z } from 'genkit';
 
 const DetectModeInputSchema = z.object({
   userInput: z.string().describe('The user input to analyze.'),
@@ -26,6 +26,7 @@ const DetectModeOutputSchema = z.object({
       'DeepDive',
       'CybersecurityOnly',
       'IndianLaw',
+      'GeneralChat',
       'Unknown',
     ])
     .describe('The detected interaction mode.'),
@@ -39,8 +40,8 @@ export async function detectMode(input: DetectModeInput): Promise<DetectModeOutp
 
 const modeDetectionPrompt = ai.definePrompt({
   name: 'modeDetectionPrompt',
-  input: {schema: DetectModeInputSchema},
-  output: {schema: DetectModeOutputSchema},
+  input: { schema: DetectModeInputSchema },
+  output: { schema: DetectModeOutputSchema },
   prompt: `You are an AI assistant that analyzes user input and determines the appropriate interaction mode for SurakshaGPT, a cybersecurity and legal assistant for Indian users.
 
 Here are the possible interaction modes:
@@ -50,7 +51,8 @@ Here are the possible interaction modes:
 - DeepDive: The user is asking for more in-depth information about a topic.
 - CybersecurityOnly: The user is explicitly asking for only cybersecurity details, skipping greetings and extras.
 - IndianLaw: The user is asking about legal actions related to cybercrime in India.
-- Unknown: The mode cannot be determined from the user input.
+- GeneralChat: The user is asking a general question, making small talk, or the input doesn't fit other specific threat categories but is still relevant to the assistant's purpose.
+- Unknown: The input is completely irrelevant or gibberish.
 
 Analyze the following user input and determine the most appropriate mode. Explain the reasoning behind your choice.
 
@@ -68,7 +70,7 @@ const detectModeFlow = ai.defineFlow(
     outputSchema: DetectModeOutputSchema,
   },
   async input => {
-    const {output} = await modeDetectionPrompt(input);
+    const { output } = await modeDetectionPrompt(input);
     return output!;
   }
 );

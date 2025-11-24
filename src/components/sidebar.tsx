@@ -39,27 +39,26 @@ export function AppSidebar() {
   const isLoggedIn = true // Placeholder for authentication state
 
   return (
-    <Sidebar variant="sidebar" collapsible="icon">
-      <SidebarHeader>
-        <Link href="/" className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="shrink-0" asChild>
-            <span className="flex items-center justify-center">
-              <Logo className="size-6 text-primary" />
-            </span>
-          </Button>
-          <span className="text-lg font-semibold text-foreground">SurakshaAI</span>
+    <Sidebar variant="sidebar" collapsible="icon" className="border-r border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <SidebarHeader className="border-b border-border/40 p-4">
+        <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-80">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <Logo className="size-5" />
+          </div>
+          <span className="text-lg font-bold tracking-tight text-foreground">SurakshaAI</span>
         </Link>
       </SidebarHeader>
 
-      <SidebarMenu className="flex-1">
+      <SidebarMenu className="flex-1 px-2 py-4 gap-1">
         {menuItems.map(item => (
           <SidebarMenuItem key={item.href}>
             <Link href={item.href}>
               <SidebarMenuButton
                 isActive={pathname.startsWith(item.href)}
                 tooltip={item.label}
+                className="h-10 rounded-md transition-all hover:bg-muted/80 data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-medium"
               >
-                <item.icon />
+                <item.icon className="size-4" />
                 <span>{item.label}</span>
               </SidebarMenuButton>
             </Link>
@@ -67,22 +66,23 @@ export function AppSidebar() {
         ))}
       </SidebarMenu>
 
-      <SidebarFooter>
-         <SidebarMenuItem>
-            <Link href="/settings">
-              <SidebarMenuButton
-                isActive={pathname.startsWith('/settings')}
-                tooltip={'Profile & Security'}
-              >
-                <Settings />
-                <span>{'Profile & Security'}</span>
-              </SidebarMenuButton>
-            </Link>
-          </SidebarMenuItem>
+      <SidebarFooter className="border-t border-border/40 p-2">
+        <SidebarMenuItem>
+          <Link href="/settings">
+            <SidebarMenuButton
+              isActive={pathname.startsWith('/settings')}
+              tooltip={'Profile & Security'}
+              className="h-10 rounded-md hover:bg-muted/80"
+            >
+              <Settings className="size-4" />
+              <span>{'Profile & Security'}</span>
+            </SidebarMenuButton>
+          </Link>
+        </SidebarMenuItem>
         <SidebarMenuItem>
           <Link href="#">
-            <SidebarMenuButton tooltip={isLoggedIn ? 'Logout' : 'Login'}>
-              {isLoggedIn ? <LogOut /> : <LogIn />}
+            <SidebarMenuButton tooltip={isLoggedIn ? 'Logout' : 'Login'} className="h-10 rounded-md hover:bg-muted/80">
+              {isLoggedIn ? <LogOut className="size-4" /> : <LogIn className="size-4" />}
               <span>{isLoggedIn ? 'Logout' : 'Login'}</span>
             </SidebarMenuButton>
           </Link>
