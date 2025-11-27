@@ -27,23 +27,29 @@ export default function LibraryPage() {
 
   useEffect(() => {
     setIsClient(true)
-    try {
-      const items = JSON.parse(localStorage.getItem('suraksha-library-items') || '[]')
-      setSavedItems(items)
-    } catch (error) {
-      console.error("Failed to parse library items from localStorage", error)
+    if (typeof window !== 'undefined') {
+      try {
+        const items = JSON.parse(localStorage.getItem('suraksha-library-items') || '[]')
+        setSavedItems(items)
+      } catch (error) {
+        console.error('Failed to parse library items from localStorage', error)
+      }
     }
   }, [])
 
   const removeItem = (id: string) => {
     const updatedItems = savedItems.filter(item => item.id !== id)
     setSavedItems(updatedItems)
-    localStorage.setItem('suraksha-library-items', JSON.stringify(updatedItems))
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('suraksha-library-items', JSON.stringify(updatedItems))
+    }
   }
-  
+
   const clearAllItems = () => {
     setSavedItems([])
-    localStorage.removeItem('suraksha-library-items')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('suraksha-library-items')
+    }
   }
 
   if (!isClient) {
@@ -65,9 +71,9 @@ export default function LibraryPage() {
               {savedItems.length > 0 && (
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                     <Button variant="destructive">
+                    <Button variant="destructive">
                       <Trash2 className="mr-2 h-4 w-4" /> Clear All
-                     </Button>
+                    </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
@@ -107,26 +113,26 @@ export default function LibraryPage() {
                       <p className="text-sm whitespace-pre-wrap">{item.message.content}</p>
                     </CardContent>
                     <CardFooter className="flex justify-between items-center text-xs text-muted-foreground">
-                       <span>Saved {formatDistanceToNow(new Date(item.savedAt), { addSuffix: true })}</span>
-                        <AlertDialog>
-                            <AlertDialogTrigger asChild>
-                                <Button variant="ghost" size="icon" className="h-7 w-7">
-                                    <Trash2 className="h-4 w-4 text-destructive" />
-                                </Button>
-                            </AlertDialogTrigger>
-                            <AlertDialogContent>
-                                <AlertDialogHeader>
-                                <AlertDialogTitle>Delete Item?</AlertDialogTitle>
-                                <AlertDialogDescription>
-                                    Are you sure you want to remove this item from your library? This action cannot be undone.
-                                </AlertDialogDescription>
-                                </AlertDialogHeader>
-                                <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                <AlertDialogAction onClick={() => removeItem(item.id)}>Delete</AlertDialogAction>
-                                </AlertDialogFooter>
-                            </AlertDialogContent>
-                        </AlertDialog>
+                      <span>Saved {formatDistanceToNow(new Date(item.savedAt), { addSuffix: true })}</span>
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="ghost" size="icon" className="h-7 w-7">
+                            <Trash2 className="h-4 w-4 text-destructive" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Delete Item?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure you want to remove this item from your library? This action cannot be undone.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => removeItem(item.id)}>Delete</AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </CardFooter>
                   </Card>
                 ))}

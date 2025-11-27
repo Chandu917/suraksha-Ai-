@@ -8,8 +8,8 @@
  * - PasswordStrengthOutput - The return type for the checkPasswordStrength function.
  */
 
-import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
+import { ai } from '@/ai/genkit';
+import { z } from 'genkit';
 
 const PasswordStrengthInputSchema = z.object({
   password: z.string().describe('The password to be analyzed.'),
@@ -48,8 +48,8 @@ export async function checkPasswordStrength(
 
 const passwordStrengthPrompt = ai.definePrompt({
   name: 'passwordStrengthPrompt',
-  input: {schema: PasswordStrengthInputSchema},
-  output: {schema: PasswordStrengthOutputSchema},
+  input: { schema: PasswordStrengthInputSchema },
+  output: { schema: PasswordStrengthOutputSchema },
   prompt: `You are a cybersecurity expert specializing in password security. Analyze the provided password based on various criteria and provide a detailed strength assessment.
 
 Password to analyze: {{{password}}}
@@ -78,12 +78,12 @@ const passwordStrengthCheckerFlow = ai.defineFlow(
     if (!input.password || input.password.length === 0) {
       return {
         score: 0,
-        strength: 'Very Weak',
+        strength: 'Very Weak' as const,
         suggestions: ['Password cannot be empty.'],
         feedback: 'Please enter a password to check its strength.',
-      };
+      } satisfies PasswordStrengthOutput;
     }
-    const {output} = await passwordStrengthPrompt(input);
+    const { output } = await passwordStrengthPrompt(input);
     return output!;
   }
 );

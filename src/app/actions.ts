@@ -76,6 +76,11 @@ export async function getAiResponse(history: Message[]): Promise<Message> {
     }
   } catch (error) {
     console.error('Error getting AI response:', error);
+    console.error('Error details:', JSON.stringify(error, null, 2));
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
     // Check if it's a specific Genkit error or API error if possible, otherwise generic
     return {
       id,

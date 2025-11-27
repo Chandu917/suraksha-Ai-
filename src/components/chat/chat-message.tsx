@@ -97,70 +97,65 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
   }
 
   return (
-    <div className={cn('flex items-start gap-4', isUser && 'justify-end')}>
-      {!isUser && (
-        <Avatar className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/50 bg-background">
-          <Logo className="h-6 w-6" />
-        </Avatar>
-      )}
+    <div className={cn('flex w-full flex-col gap-1', isUser ? 'items-end' : 'items-start')}>
       <div
         className={cn(
-          'flex max-w-xl flex-col gap-2 rounded-2xl px-4 py-3 shadow-sm',
+          'flex max-w-[85%] flex-col gap-2 rounded-2xl px-5 py-3 shadow-sm transition-all duration-200',
           isUser
-            ? 'rounded-br-none bg-primary text-primary-foreground'
-            : 'rounded-bl-none bg-transparent px-0 shadow-none'
+            ? 'bg-primary text-primary-foreground rounded-br-sm'
+            : 'bg-muted/50 text-foreground rounded-bl-sm border border-border/50'
         )}
       >
-        <div className="prose-sm prose-neutral dark:prose-invert whitespace-pre-wrap break-words">
+        <div className="prose-sm prose-neutral dark:prose-invert whitespace-pre-wrap break-words leading-relaxed">
           {message.threatData ? (
             <div className="w-full">
-              <Accordion type="multiple" defaultValue={['threat', 'steps']} className="w-full">
-                <AccordionItem value="threat">
-                  <AccordionTrigger className="font-semibold text-base">
+              <Accordion type="multiple" defaultValue={['threat', 'steps']} className="w-full border-none">
+                <AccordionItem value="threat" className="border-b-0 mb-2">
+                  <AccordionTrigger className="font-semibold text-base py-2 hover:no-underline hover:bg-black/5 dark:hover:bg-white/5 rounded-lg px-2 -mx-2">
                     <div className="flex items-center gap-2">
-                      <ShieldCheck className="h-5 w-5 text-primary" />
+                      <ShieldCheck className="h-4 w-4" />
                       Threat / Issue
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent>
+                  <AccordionContent className="px-2">
                     {message.threatData.threat}
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="steps">
-                  <AccordionTrigger className="font-semibold text-base">
+                <AccordionItem value="steps" className="border-b-0 mb-2">
+                  <AccordionTrigger className="font-semibold text-base py-2 hover:no-underline hover:bg-black/5 dark:hover:bg-white/5 rounded-lg px-2 -mx-2">
                     <div className="flex items-center gap-2">
-                      <ListOrdered className="h-5 w-5 text-primary" />
+                      <ListOrdered className="h-4 w-4" />
                       Steps to Fix
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent>
+                  <AccordionContent className="px-2">
                     {message.threatData.stepsToFix}
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="precautions">
-                  <AccordionTrigger className="font-semibold text-base">
+                <AccordionItem value="precautions" className="border-b-0 mb-2">
+                  <AccordionTrigger className="font-semibold text-base py-2 hover:no-underline hover:bg-black/5 dark:hover:bg-white/5 rounded-lg px-2 -mx-2">
                     <div className="flex items-center gap-2">
-                      <AlertCircle className="h-5 w-5 text-primary" />
+                      <AlertCircle className="h-4 w-4" />
                       Precautions
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent>
+                  <AccordionContent className="px-2">
                     {message.threatData.precautions}
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="laws">
-                  <AccordionTrigger className="font-semibold text-base">
+                <AccordionItem value="laws" className="border-b-0">
+                  <AccordionTrigger className="font-semibold text-base py-2 hover:no-underline hover:bg-black/5 dark:hover:bg-white/5 rounded-lg px-2 -mx-2">
                     <div className="flex items-center gap-2">
-                      <Landmark className="h-5 w-5 text-primary" />
+                      <Landmark className="h-4 w-4" />
                       Relevant Indian Laws
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="font-code">{message.threatData.relevantIndianLaws}</p>
+                  <AccordionContent className="px-2">
+                    <p className="font-code text-xs bg-black/10 dark:bg-white/10 p-2 rounded-md">{message.threatData.relevantIndianLaws}</p>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-              <p className="mt-4 text-center font-medium">Stay safe online! 🛡</p>
+              <p className="mt-4 text-center font-medium text-sm opacity-80">Stay safe online! 🛡</p>
             </div>
 
           ) : isUser ? (
@@ -172,26 +167,18 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
           )}
         </div>
         {!isUser && !isTyping && (
-          <div className="-mb-2 -mr-2 mt-2 flex items-center justify-end gap-1">
-            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleCopy}>
-              <Copy className="h-4 w-4" />
+          <div className="-mb-1 -mr-1 mt-1 flex items-center justify-end gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+            <Button variant="ghost" size="icon" className="h-6 w-6 rounded-full hover:bg-black/10 dark:hover:bg-white/10" onClick={handleCopy}>
+              <Copy className="h-3 w-3" />
               <span className="sr-only">Copy</span>
             </Button>
-            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleBookmark}>
-              <Bookmark className="h-4 w-4" />
+            <Button variant="ghost" size="icon" className="h-6 w-6 rounded-full hover:bg-black/10 dark:hover:bg-white/10" onClick={handleBookmark}>
+              <Bookmark className="h-3 w-3" />
               <span className="sr-only">Bookmark</span>
             </Button>
           </div>
         )}
       </div>
-      {isUser && (
-        <Avatar className="flex h-10 w-10 items-center justify-center rounded-full border border-border">
-          <AvatarImage src="https://placehold.co/40x40.png" alt="User" data-ai-hint="person avatar" />
-          <AvatarFallback>
-            <User className="h-5 w-5" />
-          </AvatarFallback>
-        </Avatar>
-      )}
     </div>
   )
 }

@@ -29,14 +29,12 @@ export function ChatMessages({ messages, isLoading, onSaveMessage }: ChatMessage
           <ChatMessage key={index} message={message} onSave={onSaveMessage} />
         ))}
         {isLoading && (
-          <div className="flex items-start gap-4">
-            <Avatar className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/50 bg-background">
-              <Logo className="h-6 w-6 animate-spin" />
-            </Avatar>
-            <div className="w-full space-y-2">
-              <Skeleton className="h-4 w-1/2" />
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-4 w-3/4" />
+          <div className="flex w-full flex-col gap-1 items-start">
+            <div className="flex max-w-[85%] flex-col gap-2 rounded-2xl rounded-bl-sm px-5 py-3 shadow-sm bg-muted/50 border border-border/50">
+              <div className="space-y-2 w-full min-w-[200px]">
+                <Skeleton className="h-4 w-3/4 bg-foreground/10" />
+                <Skeleton className="h-4 w-1/2 bg-foreground/10" />
+              </div>
             </div>
           </div>
         )}

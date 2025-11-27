@@ -46,7 +46,18 @@ const generalChatFlow = ai.defineFlow(
         outputSchema: GeneralChatOutputSchema,
     },
     async input => {
-        const { output } = await generalChatPrompt(input);
-        return output!;
+        try {
+            const { output } = await generalChatPrompt(input);
+            if (!output) {
+                throw new Error('No output generated from AI');
+            }
+            return output;
+        } catch (error) {
+            console.error('Error in generalChatFlow:', error);
+            // Return a fallback response instead of crashing
+            return {
+                response: "I apologize, but I'm having trouble processing your request right now. Could you please try asking again?"
+            };
+        }
     }
 );

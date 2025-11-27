@@ -1,8 +1,8 @@
+import '@/lib/localStorage-polyfill';
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://suraksha-ai.app'), // Replace with your actual domain
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'SurakshaAI: AI Cybersecurity Guardian for India',
     description: 'Stay safe online with AI-powered threat analysis and Indian cyber law guidance.',
-     images: ['/twitter-image.png'], // You would need to create this image
+    images: ['/twitter-image.png'], // You would need to create this image
   },
   robots: {
     index: true,
@@ -59,11 +59,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet" />
-        
+
         {/* SEO and Social Media Meta Tags */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://suraksha-ai.vercel.app" />
-        
+
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -75,7 +75,6 @@ export default function RootLayout({
         {children}
         <Toaster />
         <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

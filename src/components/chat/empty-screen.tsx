@@ -34,21 +34,21 @@ export function EmptyScreen({ onSelectPrompt }: EmptyScreenProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left pt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left pt-8 w-full">
           {examplePrompts.map((prompt, i) => (
             <Card
               key={i}
-              className="group cursor-pointer bg-muted/40 hover:bg-muted/80 border-border/50 hover:border-primary/50 transition-all duration-300 hover:-translate-y-0.5"
+              className="group cursor-pointer bg-muted/30 hover:bg-muted/50 border-white/10 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm shadow-sm hover:shadow-[0_0_15px_rgba(var(--primary),0.1)]"
               onClick={() => onSelectPrompt(prompt)}
             >
               <CardContent className="p-4 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                    <BotMessageSquare className="h-4 w-4" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-sm">
+                    <BotMessageSquare className="h-5 w-5" />
                   </div>
-                  <p className="text-sm font-medium leading-tight">{prompt}</p>
+                  <p className="text-sm font-medium leading-tight text-foreground/90 group-hover:text-primary transition-colors">{prompt}</p>
                 </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
               </CardContent>
             </Card>
           ))}

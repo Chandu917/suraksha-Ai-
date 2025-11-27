@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { type Message, type SavedItem } from '@/lib/types'
 import { getAiResponse } from '@/app/actions'
 import { ChatMessages } from '@/components/chat/chat-messages'
@@ -11,13 +11,16 @@ import { useToast } from '@/hooks/use-toast'
 export function ChatPanel() {
   const [messages, setMessages] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const bottomRef = useRef<HTMLDivElement>(null)
   const { toast } = useToast()
 
   useEffect(() => {
     try {
-      const storedMessages = localStorage.getItem('suraksha-chat-history')
-      if (storedMessages) {
-        setMessages(JSON.parse(storedMessages))
+      if (typeof window !== 'undefined') {
+        const storedMessages = localStorage.getItem('suraksha-chat-history')
+        if (storedMessages) {
+          setMessages(JSON.parse(storedMessages))
+        }
       }
     } catch (error) {
       console.error("Failed to parse chat history from localStorage", error)
@@ -25,10 +28,15 @@ export function ChatPanel() {
   }, [])
 
   useEffect(() => {
-    if (messages.length > 0) {
+    if (typeof window !== 'undefined' && messages.length > 0) {
       localStorage.setItem('suraksha-chat-history', JSON.stringify(messages))
     }
   }, [messages])
+
+  // Auto‑scroll to the newest message
+  useEffect(() => {
+    bottomRef?.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, isLoading])
 
   const handleSendMessage = async (input: string) => {
     if (!input.trim() || isLoading) return
@@ -61,10 +69,14 @@ export function ChatPanel() {
 
   const clearChat = () => {
     setMessages([])
-    localStorage.removeItem('suraksha-chat-history')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('suraksha-chat-history')
+    }
   }
 
   const saveToLibrary = (message: Message) => {
+    if (typeof window === 'undefined') return
+
     try {
       const savedItems: SavedItem[] = JSON.parse(localStorage.getItem('suraksha-library-items') || '[]')
 
@@ -96,17 +108,24 @@ export function ChatPanel() {
   }
 
   return (
-    <div className="relative flex h-full flex-col bg-background">
-      <div className="flex-1 overflow-y-auto">
+    <div className="relative flex h-full flex-col bg-background overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent pointer-events-none"></div>
+
+      <div className="flex-1 overflow-y-auto relative z-10">
         <div className="mx-auto max-w-3xl h-full">
           {messages.length > 0 ? (
-            <ChatMessages messages={messages} isLoading={isLoading} onSaveMessage={saveToLibrary} />
+            <>
+              <ChatMessages messages={messages} isLoading={isLoading} onSaveMessage={saveToLibrary} />
+              <div ref={bottomRef} />
+            </>
           ) : (
             <EmptyScreen onSelectPrompt={handleSendMessage} />
           )}
         </div>
       </div>
-      <div className="mt-auto p-4 bg-background">
+      <div className="mt-auto p-4 bg-background/80 backdrop-blur-md border-t border-border/40 relative z-10">
         <ChatInputForm onSubmit={handleSendMessage} isLoading={isLoading} clearChat={clearChat} />
       </div>
     </div>

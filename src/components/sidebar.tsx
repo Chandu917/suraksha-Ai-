@@ -39,10 +39,10 @@ export function AppSidebar() {
   const isLoggedIn = true // Placeholder for authentication state
 
   return (
-    <Sidebar variant="sidebar" collapsible="icon" className="border-r border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <Sidebar variant="sidebar" collapsible="icon" className="border-r border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <SidebarHeader className="border-b border-border/40 p-4">
         <Link href="/" className="flex items-center gap-3 transition-opacity hover:opacity-80">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/20 text-primary ring-1 ring-primary/20 shadow-[0_0_15px_rgba(var(--primary),0.3)]">
             <Logo className="size-5" />
           </div>
           <span className="text-lg font-bold tracking-tight text-foreground">SurakshaAI</span>
@@ -56,7 +56,7 @@ export function AppSidebar() {
               <SidebarMenuButton
                 isActive={pathname.startsWith(item.href)}
                 tooltip={item.label}
-                className="h-10 rounded-md transition-all hover:bg-muted/80 data-[active=true]:bg-primary/10 data-[active=true]:text-primary data-[active=true]:font-medium"
+                className="h-10 rounded-md transition-all duration-200 hover:bg-primary/10 hover:text-primary data-[active=true]:bg-primary/15 data-[active=true]:text-primary data-[active=true]:font-medium data-[active=true]:shadow-[0_0_10px_rgba(var(--primary),0.1)] border border-transparent data-[active=true]:border-primary/20"
               >
                 <item.icon className="size-4" />
                 <span>{item.label}</span>
