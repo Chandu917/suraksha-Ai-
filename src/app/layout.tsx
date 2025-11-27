@@ -2,7 +2,6 @@ import '@/lib/localStorage-polyfill';
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://suraksha-ai.app'), // Replace with your actual domain
@@ -74,7 +73,6 @@ export default function RootLayout({
       <body className="font-body antialiased">
         {children}
         <Toaster />
-        <Analytics />
       </body>
     </html>
   );
