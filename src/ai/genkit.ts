@@ -8,5 +8,5 @@ if (process.env.GOOGLE_GENAI_API_KEY) {
 
 export const ai = genkit({
   plugins,
-  model: 'googleai/gemini-2.0-flash-001',
+  model: 'googleai/gemini-1.5-flash',
 });
