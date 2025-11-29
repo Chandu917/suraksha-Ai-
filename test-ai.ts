@@ -1,8 +1,8 @@
-import { generalChat } from './src/ai/flows/general-chat';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
 async function run() {
+    const { generalChat } = await import('./src/ai/flows/general-chat');
     try {
         console.log('Current directory:', process.cwd());
         console.log('GOOGLE_API_KEY present:', !!process.env.GOOGLE_API_KEY);
