@@ -126,7 +126,7 @@ export function ChatPanel() {
         </div>
       </div>
       <div className="mt-auto p-4 bg-background/80 backdrop-blur-md border-t border-border/40 relative z-10">
-        <ChatInputForm onSubmit={handleSendMessage} isLoading={isLoading} clearChat={clearChat} />
+        <ChatInputForm onSubmit={handleSendMessage} isLoading={isLoading} clearChat={clearChat} messages={messages} />
       </div>
     </div>
   )

@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { SendHorizonal, Plus, Trash2, Sparkles } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
 
+import { type Message } from '@/lib/types'
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,9 +24,10 @@ interface ChatInputFormProps {
   onSubmit: (input: string) => Promise<void>
   isLoading: boolean
   clearChat: () => void
+  messages: Message[]
 }
 
-export function ChatInputForm({ onSubmit, isLoading, clearChat }: ChatInputFormProps) {
+export function ChatInputForm({ onSubmit, isLoading, clearChat, messages }: ChatInputFormProps) {
   const [input, setInput] = useState('')
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
@@ -73,6 +76,8 @@ export function ChatInputForm({ onSubmit, isLoading, clearChat }: ChatInputFormP
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+
+
 
         <div className="relative flex-1">
           <Textarea

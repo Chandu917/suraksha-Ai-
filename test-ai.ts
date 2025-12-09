@@ -1,24 +1,34 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-async function run() {
-    const { generalChat } = await import('./src/ai/flows/general-chat');
+async function listModels() {
+    const key = process.env.GOOGLE_GENAI_API_KEY || process.env.GOOGLE_API_KEY;
+    if (!key) {
+        console.error('No API Key');
+        return;
+    }
+
+    console.log('Listing models...');
     try {
-        console.log('Current directory:', process.cwd());
-        console.log('GOOGLE_API_KEY present:', !!process.env.GOOGLE_API_KEY);
-        console.log('GOOGLE_GENAI_API_KEY present:', !!process.env.GOOGLE_GENAI_API_KEY);
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${key}`);
+        const data = await response.json();
 
-        if (!process.env.GOOGLE_API_KEY) {
-            console.error('ERROR: GOOGLE_API_KEY is missing from environment variables.');
-            process.exit(1);
+        if (data.error) {
+            console.error('API Error:', JSON.stringify(data.error, null, 2));
+        } else if (data.models) {
+            console.log('Available Models:');
+            data.models.forEach((m: any) => {
+                if (m.name.includes('gemini')) {
+                    console.log(`- ${m.name} (${m.displayName})`);
+                    console.log(`  Supported: ${m.supportedGenerationMethods.join(', ')}`);
+                }
+            });
+        } else {
+            console.log('No models found or unexpected response:', data);
         }
-
-        console.log('Testing AI connection...');
-        const result = await generalChat({ userInput: 'Hello' });
-        console.log('AI Response:', JSON.stringify(result, null, 2));
     } catch (e) {
-        console.error('AI Error:', e);
-        process.exit(1);
+        console.error('Fetch Error:', e);
     }
 }
-run();
+
+listModels();
