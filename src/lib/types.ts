@@ -13,15 +13,4 @@ export interface SavedItem {
   message: Message
 }
 
-export interface SharedChat {
-  id: string
-  title: string
-  messages: Message[]
-  createdAt: string
-}
 
-export interface ShareResult {
-  success: boolean
-  shareUrl?: string
-  error?: string
-}

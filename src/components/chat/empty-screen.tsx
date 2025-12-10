@@ -18,7 +18,7 @@ const examplePrompts = [
 
 export function EmptyScreen({ onSelectPrompt }: EmptyScreenProps) {
   return (
-    <div className="flex h-full flex-col items-center justify-center p-4 animate-in fade-in duration-500">
+    <div className="flex h-full flex-col items-center justify-center p-4">
       <div className="w-full max-w-2xl text-center space-y-6">
         <div className="relative inline-block">
           <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full"></div>
