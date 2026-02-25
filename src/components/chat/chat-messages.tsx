@@ -2,9 +2,6 @@
 
 import { type Message } from '@/lib/types'
 import { ChatMessage } from '@/components/chat/chat-message'
-import { useEffect, useRef } from 'react'
-import { Skeleton } from '../ui/skeleton'
-import { Avatar } from '../ui/avatar'
 import { Logo } from '../icons/logo'
 
 interface ChatMessagesProps {
@@ -14,31 +11,40 @@ interface ChatMessagesProps {
 }
 
 export function ChatMessages({ messages, isLoading, onSaveMessage }: ChatMessagesProps) {
-  const scrollableContainerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (scrollableContainerRef.current) {
-      scrollableContainerRef.current.scrollTop = scrollableContainerRef.current.scrollHeight
-    }
-  }, [messages, isLoading])
-
   return (
-    <div ref={scrollableContainerRef} className="h-full overflow-y-auto p-4 md:p-6">
-      <div className="mx-auto max-w-3xl space-y-6">
-        {messages.map((message, index) => (
-          <ChatMessage key={index} message={message} onSave={onSaveMessage} />
-        ))}
-        {isLoading && (
-          <div className="flex w-full flex-col gap-1 items-start">
-            <div className="flex max-w-[85%] flex-col gap-2 rounded-2xl rounded-bl-sm px-5 py-3 shadow-sm bg-muted/50 border border-border/50">
-              <div className="space-y-2 w-full min-w-[200px]">
-                <Skeleton className="h-4 w-3/4 bg-foreground/10" />
-                <Skeleton className="h-4 w-1/2 bg-foreground/10" />
-              </div>
-            </div>
+    /*
+     * No fixed height, no internal scroll.
+     * Just a plain vertical list — the parent container scrolls.
+     */
+    <div className="flex flex-col gap-0">
+      {messages.map((message, index) => (
+        <ChatMessage key={index} message={message} onSave={onSaveMessage} />
+      ))}
+
+      {/* ── Thinking indicator ── */}
+      {isLoading && (
+        <div className="flex items-start gap-3 py-6 px-2">
+          {/* AI avatar */}
+          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+            <Logo className="w-4 h-4 text-primary" />
           </div>
-        )}
-      </div>
+          {/* Pulsing dots */}
+          <div className="flex items-center gap-1 pt-2">
+            <span
+              className="w-2 h-2 rounded-full bg-primary/60 animate-bounce"
+              style={{ animationDelay: '0ms' }}
+            />
+            <span
+              className="w-2 h-2 rounded-full bg-primary/60 animate-bounce"
+              style={{ animationDelay: '150ms' }}
+            />
+            <span
+              className="w-2 h-2 rounded-full bg-primary/60 animate-bounce"
+              style={{ animationDelay: '300ms' }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

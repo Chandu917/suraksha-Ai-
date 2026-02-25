@@ -11,7 +11,7 @@ export default function ChatPage() {
         <AppSidebar />
         <SidebarInset className="flex flex-col bg-background">
           <Header />
-          <main className="flex-1 overflow-hidden">
+          <main className="flex-1 flex flex-col min-h-0">
             <ChatPanel />
           </main>
         </SidebarInset>
