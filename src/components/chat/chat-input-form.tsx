@@ -3,22 +3,8 @@
 import { useState, useRef, type FormEvent } from 'react'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
-import { SendHorizonal, Plus, Trash2, Sparkles } from 'lucide-react'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
-
+import { Send } from 'lucide-react'
 import { type Message } from '@/lib/types'
-
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
 
 interface ChatInputFormProps {
   onSubmit: (input: string) => Promise<void>
@@ -46,63 +32,45 @@ export function ChatInputForm({ onSubmit, isLoading, clearChat, messages }: Chat
   }
 
   return (
-    <TooltipProvider>
+    <div className="mx-auto max-w-3xl w-full">
       <form
         onSubmit={handleSubmit}
-        className="relative flex w-full max-w-3xl mx-auto items-start gap-4"
+        className="relative group"
       >
-        <AlertDialog>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <AlertDialogTrigger asChild>
-                <Button type="button" size="icon" variant="outline" className="shrink-0" disabled={isLoading}>
-                  <Trash2 className="h-5 w-5" />
-                  <span className="sr-only">New Chat</span>
-                </Button>
-              </AlertDialogTrigger>
-            </TooltipTrigger>
-            <TooltipContent side="top">Clear Chat</TooltipContent>
-          </Tooltip>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This will clear your current chat history. This action cannot be undone.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={clearChat}>Continue</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-2xl opacity-0 group-focus-within:opacity-100 transition-opacity"></div>
+        <div className="relative flex items-end gap-2 p-2 glass border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
 
-
-
-        <div className="relative flex-1">
           <Textarea
             ref={inputRef}
+            tabIndex={0}
+            placeholder="Initialize Query... (e.g., Analyze suspicious link)"
+            className="min-h-[56px] w-full resize-none bg-transparent px-4 py-[18px] focus-within:outline-none border-none text-white font-medium placeholder:text-white/20 scrollbar-none shadow-none"
+            autoFocus
+            spellCheck={false}
+            autoComplete="off"
+            autoCorrect="off"
+            rows={1}
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask about a phishing email, a suspicious link, or Indian cyber laws..."
-            className="min-h-[48px] resize-none rounded-2xl border-2 border-border/80 bg-muted/80 pr-16 shadow-sm focus:border-primary/50"
-            rows={1}
             disabled={isLoading}
           />
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button type="submit" size="icon" className="h-8 w-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 text-white" disabled={isLoading || !input.trim()}>
-                  <SendHorizonal className="h-4 w-4" />
-                  <span className="sr-only">Send</span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="top">Send Message</TooltipContent>
-            </Tooltip>
+          <div className="flex items-center gap-2 pr-2 pb-2">
+            <Button
+              type="submit"
+              size="icon"
+              className="h-10 w-10 shrink-0 rounded-xl cyber-button neon-glow border-none"
+              disabled={isLoading || !input.trim()}
+            >
+              <Send className="h-5 w-5" />
+              <span className="sr-only">Send Data</span>
+            </Button>
           </div>
         </div>
       </form>
-    </TooltipProvider>
+      <p className="mt-3 text-center text-[10px] font-bold text-white/20 uppercase tracking-widest">
+        SurakshaAI can identify cyber threats but always verify sensitive information manually.
+      </p>
+    </div>
   )
 }

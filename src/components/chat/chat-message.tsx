@@ -97,69 +97,93 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
   }
 
   return (
-    <div className={cn('flex w-full flex-col gap-1', isUser ? 'items-end' : 'items-start')}>
+    <div className={cn('flex w-full flex-col gap-4 py-4 px-2', isUser ? 'items-end' : 'items-start')}>
+      <div className={cn('flex items-center gap-3 mb-1', isUser ? 'flex-row-reverse' : 'flex-row')}>
+        <div className={cn('flex h-8 w-8 items-center justify-center rounded-lg border',
+          isUser ? 'bg-primary/10 border-primary/20 text-primary' : 'glass border-white/10 text-white/70'
+        )}>
+          {isUser ? <User className="size-4" /> : <Logo className="size-5" />}
+        </div>
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/30">
+          {isUser ? 'Authorized User' : 'Neural Core v4.0'}
+        </span>
+      </div>
+
       <div
         className={cn(
-          'flex max-w-[85%] flex-col gap-2 rounded-2xl px-5 py-3 shadow-sm transition-all duration-200',
+          'group relative max-w-[85%] flex flex-col gap-4 rounded-3xl p-6 transition-all duration-500',
           isUser
-            ? 'bg-primary text-primary-foreground rounded-br-sm'
-            : 'bg-muted/50 text-foreground rounded-bl-sm border border-border/50'
+            ? 'cyber-button border-none !bg-gradient-to-br !from-primary !to-secondary text-white rounded-tr-none shadow-[0_4px_20px_rgba(var(--primary),0.3)]'
+            : 'glass border-white/10 text-white rounded-tl-none hover:border-primary/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)]'
         )}
       >
-        <div className="prose-sm prose-neutral dark:prose-invert whitespace-pre-wrap break-words leading-relaxed">
+        <div className="prose-sm prose-invert whitespace-pre-wrap break-words leading-relaxed font-medium">
           {message.threatData ? (
-            <div className="w-full">
-              <Accordion type="multiple" defaultValue={['threat', 'steps']} className="w-full border-none">
-                <AccordionItem value="threat" className="border-b-0 mb-2">
-                  <AccordionTrigger className="font-semibold text-base py-2 hover:no-underline hover:bg-black/5 dark:hover:bg-white/5 rounded-lg px-2 -mx-2">
-                    <div className="flex items-center gap-2">
-                      <ShieldCheck className="h-4 w-4" />
-                      Threat / Issue
+            <div className="w-full space-y-6">
+              <Accordion type="multiple" defaultValue={['threat', 'steps']} className="w-full space-y-4">
+                <AccordionItem value="threat" className="border-white/5 glass rounded-2xl overflow-hidden px-4">
+                  <AccordionTrigger className="font-bold text-sm py-4 hover:no-underline text-white/90">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-red-500/10 text-red-500 border border-red-500/20">
+                        <AlertTriangle className="h-4 w-4" />
+                      </div>
+                      THREAT ANALYSIS
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="px-2">
+                  <AccordionContent className="text-white/60 leading-relaxed pb-4">
                     {message.threatData.threat}
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="steps" className="border-b-0 mb-2">
-                  <AccordionTrigger className="font-semibold text-base py-2 hover:no-underline hover:bg-black/5 dark:hover:bg-white/5 rounded-lg px-2 -mx-2">
-                    <div className="flex items-center gap-2">
-                      <ListOrdered className="h-4 w-4" />
-                      Steps to Fix
+                <AccordionItem value="steps" className="border-white/5 glass rounded-2xl overflow-hidden px-4">
+                  <AccordionTrigger className="font-bold text-sm py-4 hover:no-underline text-white/90">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-green-500/10 text-green-500 border border-green-500/20">
+                        <ShieldCheck className="h-4 w-4" />
+                      </div>
+                      REMEDIATION STEPS
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="px-2">
+                  <AccordionContent className="text-white/60 leading-relaxed pb-4">
                     {message.threatData.stepsToFix}
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="precautions" className="border-b-0 mb-2">
-                  <AccordionTrigger className="font-semibold text-base py-2 hover:no-underline hover:bg-black/5 dark:hover:bg-white/5 rounded-lg px-2 -mx-2">
-                    <div className="flex items-center gap-2">
-                      <AlertCircle className="h-4 w-4" />
-                      Precautions
+                <AccordionItem value="precautions" className="border-white/5 glass rounded-2xl overflow-hidden px-4">
+                  <AccordionTrigger className="font-bold text-sm py-4 hover:no-underline text-white/90">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10 text-primary border border-primary/20">
+                        <AlertCircle className="h-4 w-4" />
+                      </div>
+                      FUTURE PRECAUTIONS
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="px-2">
+                  <AccordionContent className="text-white/60 leading-relaxed pb-4">
                     {message.threatData.precautions}
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="laws" className="border-b-0">
-                  <AccordionTrigger className="font-semibold text-base py-2 hover:no-underline hover:bg-black/5 dark:hover:bg-white/5 rounded-lg px-2 -mx-2">
-                    <div className="flex items-center gap-2">
-                      <Landmark className="h-4 w-4" />
-                      Relevant Indian Laws
+                <AccordionItem value="laws" className="border-white/5 glass rounded-2xl overflow-hidden px-4">
+                  <AccordionTrigger className="font-bold text-sm py-4 hover:no-underline text-white/90">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-secondary/10 text-secondary border border-secondary/20">
+                        <Landmark className="h-4 w-4" />
+                      </div>
+                      LEGAL FRAMEWORK (INDIA)
                     </div>
                   </AccordionTrigger>
-                  <AccordionContent className="px-2">
-                    <p className="font-code text-xs bg-black/10 dark:bg-white/10 p-2 rounded-md">{message.threatData.relevantIndianLaws}</p>
+                  <AccordionContent className="pb-4">
+                    <div className="p-4 rounded-xl bg-white/5 border border-white/10 font-mono text-[11px] text-secondary/80 leading-relaxed">
+                      {message.threatData.relevantIndianLaws}
+                    </div>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-              <p className="mt-4 text-center font-medium text-sm opacity-80">Stay safe online! 🛡</p>
+              <div className="flex items-center justify-center gap-2 py-4 border-t border-white/5">
+                <Shield className="w-4 h-4 text-primary animate-pulse" />
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">Neural Guard Active</span>
+              </div>
             </div>
 
           ) : isUser ? (
-            renderContentWithLinks(message.content)
+            <span className="text-base font-bold tracking-tight">{renderContentWithLinks(message.content)}</span>
           ) : isTyping ? (
             <TypingEffect text={message.content} onFinished={() => setIsTyping(false)} />
           ) : (
@@ -167,13 +191,13 @@ export function ChatMessage({ message, onSave }: ChatMessageProps) {
           )}
         </div>
         {!isUser && !isTyping && (
-          <div className="-mb-1 -mr-1 mt-1 flex items-center justify-end gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
-            <Button variant="ghost" size="icon" className="h-6 w-6 rounded-full hover:bg-black/10 dark:hover:bg-white/10" onClick={handleCopy}>
-              <Copy className="h-3 w-3" />
+          <div className="absolute top-4 right-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg glass border-white/10 hover:bg-white/10 transition-colors" onClick={handleCopy}>
+              <Copy className="h-4 w-4" />
               <span className="sr-only">Copy</span>
             </Button>
-            <Button variant="ghost" size="icon" className="h-6 w-6 rounded-full hover:bg-black/10 dark:hover:bg-white/10" onClick={handleBookmark}>
-              <Bookmark className="h-3 w-3" />
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-lg glass border-white/10 hover:bg-white/10 transition-colors" onClick={handleBookmark}>
+              <Bookmark className="h-4 w-4" />
               <span className="sr-only">Bookmark</span>
             </Button>
           </div>

@@ -4,65 +4,39 @@
 
 @layer base {
   :root {
-    /* Light mode - clean, professional, tech-focused */
-    --background: 210 40% 98%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    /* Deep Tech Blue */
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.75rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    /* Dark mode - Cyberpunk/Security aesthetic */
     --background: 224 71% 4%;
-    /* Deepest Blue/Black */
     --foreground: 210 40% 98%;
-    --card: 222 47% 11%;
-    /* Dark Blue Card */
+
+    --card: 224 71% 4%;
     --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
+
+    --popover: 224 71% 4%;
     --popover-foreground: 210 40% 98%;
+
     --primary: 199 89% 48%;
-    /* Cyan/Neon Blue */
+    /* Neon Blue */
     --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+
+    --secondary: 174 100% 41%;
+    /* Teal */
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+
+    --accent: 199 89% 48%;
     --accent-foreground: 210 40% 98%;
+
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
+
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 199 89% 48%;
 
-    --sidebar-background: 224 71% 4%;
+    --radius: 0.75rem;
+
+    --sidebar-background: 224 71% 2%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 199 89% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
@@ -80,7 +54,41 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(circle at 50% 0%, hsla(199, 89%, 48%, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 0% 100%, hsla(174, 100%, 41%, 0.05) 0%, transparent 40%),
+      linear-gradient(to right, hsla(0, 0%, 100%, 0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, hsla(0, 0%, 100%, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_#0000005e];
+  }
+
+  .glass-card {
+    @apply glass rounded-3xl p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_30px_#00a8e81a];
+  }
+
+  .neon-glow {
+    @apply shadow-[0_0_15px_#00a8e880] transition-shadow duration-300 hover:shadow-[0_0_25px_#00a8e8cc];
+  }
+
+  .cyber-button {
+    @apply relative overflow-hidden transition-all duration-300 active:scale-95;
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+  }
+
+  .cyber-button::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300 bg-white/20;
+  }
+
+  .cyber-button:hover::after {
+    @apply opacity-100;
   }
 }
 
@@ -88,4 +96,26 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  .animate-slow-fade {
+    animation: fade-in 2s ease-out forwards;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* Hide Next.js Dev Tool Portal (Segment Explorer 'N') */
+nextjs-portal,
+#__nextjs_badge {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }

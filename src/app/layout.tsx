@@ -2,6 +2,7 @@ import '@/lib/localStorage-polyfill';
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
+import { AuthProvider } from '@/lib/auth-context';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://suraksha-ai.app'), // Replace with your actual domain
@@ -71,8 +72,10 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className="font-body antialiased" suppressHydrationWarning>
-        {children}
-        <Toaster />
+        <AuthProvider>
+          {children}
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   );

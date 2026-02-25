@@ -9,73 +9,52 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
       {...props}
     >
       <defs>
-        <linearGradient id="tricolor-border" x1="0.5" y1="0" x2="0.5" y2="1">
-          <stop stopColor="#FF9933" />
-          <stop offset="0.5" stopColor="#FFFFFF" />
-          <stop offset="1" stopColor="#138808" />
+        <linearGradient id="neon-gradient" x1="0" y1="0" x2="1" y2="1">
+          <stop stopColor="#00E5FF" /> {/* Neon Cyan */}
+          <stop offset="1" stopColor="#007AFF" /> {/* Neon Blue */}
         </linearGradient>
-        <linearGradient id="ai-glow" x1="0" y1="0" x2="1" y2="1">
-          <stop stopColor="#8A2BE2" />
-          <stop offset="1" stopColor="#4169E1" />
-        </linearGradient>
-        <radialGradient id="shield-body" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-            <stop offset="0%" stopColor="#1e3a8a" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="#0a192f" stopOpacity="1" />
+        <radialGradient id="shield-inner-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+          <stop offset="0%" stopColor="#00E5FF" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#00E5FF" stopOpacity="0" />
         </radialGradient>
-        <filter id="outer-glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
+        <filter id="logo-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur" />
+          <feOffset in="blur" dx="0" dy="0" result="offsetBlur" />
+          <feFlood floodColor="#00E5FF" floodOpacity="0.6" result="glowColor" />
+          <feComposite in="glowColor" in2="offsetBlur" operator="in" result="glow" />
           <feMerge>
-            <feMergeNode in="blur" />
+            <feMergeNode in="glow" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
-         <filter id="inner-glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feComponentTransfer in="SourceAlpha">
-            <feFuncA type="table" tableValues="0 1 1 1 1 1 1 1 1 1 1" />
-          </feComponentTransfer>
-          <feGaussianBlur stdDeviation="2.5" />
-          <feComposite operator="in" in2="SourceAlpha" result="shadow" />
-          <feComposite operator="in" in2="SourceGraphic" result="inner-glow-and-shape" />
-          <feColorMatrix
-            in="shadow"
-            result="color-shadow"
-            type="matrix"
-            values="0 0 0 0 0.54
-                    0 0 0 0 0.17
-                    0 0 0 0 0.89
-                    0 0 0 1 0"
-          />
-          <feMerge>
-            <feMergeNode in="color-shadow" />
-            <feMergeNode in="inner-glow-and-shape" />
-          </feMerge>
-        </filter>
       </defs>
-      
-      <g filter="url(#outer-glow)">
+
+      <g filter="url(#logo-glow)">
+        {/* Main Shield Outline */}
         <path
-            d="M50 110C50 110 90 90 90 55V20L50 5L10 20V55C10 90 50 110 50 110Z"
-            fill="url(#shield-body)"
-            stroke="url(#tricolor-border)"
-            strokeWidth="4"
+          d="M50 110C50 110 90 90 90 55V20L50 5L10 20V55C10 90 50 110 50 110Z"
+          stroke="url(#neon-gradient)"
+          strokeWidth="3"
+          strokeLinejoin="round"
+          fill="rgba(0, 229, 255, 0.05)"
         />
-      </g>
 
-      <g filter="url(#inner-glow)" opacity="0.8">
-          <path d="M50 25V35" stroke="url(#ai-glow)" strokeWidth="2" strokeLinecap="round" />
-          <path d="M50 75V85" stroke="url(#ai-glow)" strokeWidth="2" strokeLinecap="round" />
-          
-          <path d="M35 35L42 42" stroke="url(#ai-glow)" strokeWidth="2" strokeLinecap="round" />
-          <path d="M65 35L58 42" stroke="url(#ai-glow)" strokeWidth="2" strokeLinecap="round" />
-          
-          <path d="M35 65L42 58" stroke="url(#ai-glow)" strokeWidth="2" strokeLinecap="round" />
-          <path d="M65 65L58 58" stroke="url(#ai-glow)" strokeWidth="2" strokeLinecap="round" />
+        {/* Inner Shield Detail */}
+        <path
+          d="M50 95C50 95 78 80 78 55V28L50 17L22 28V55C22 80 50 95 50 95Z"
+          stroke="url(#neon-gradient)"
+          strokeWidth="1"
+          strokeOpacity="0.5"
+          fill="url(#shield-inner-glow)"
+        />
 
-          <path d="M30 50H40" stroke="url(#ai-glow)" strokeWidth="2" strokeLinecap="round" />
-          <path d="M70 50H60" stroke="url(#ai-glow)" strokeWidth="2" strokeLinecap="round" />
-
-          <circle cx="50" cy="50" r="10" stroke="url(#ai-glow)" strokeWidth="2"/>
-          <circle cx="50" cy="50" r="4" fill="url(#ai-glow)"/>
+        {/* AI/Cyber Symbol in Center */}
+        <circle cx="50" cy="53" r="12" stroke="url(#neon-gradient)" strokeWidth="2" strokeDasharray="4 2" />
+        <path d="M50 43V48" stroke="url(#neon-gradient)" strokeWidth="2" strokeLinecap="round" />
+        <path d="M50 58V63" stroke="url(#neon-gradient)" strokeWidth="2" strokeLinecap="round" />
+        <path d="M40 53H45" stroke="url(#neon-gradient)" strokeWidth="2" strokeLinecap="round" />
+        <path d="M55 53H60" stroke="url(#neon-gradient)" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="50" cy="53" r="3" fill="url(#neon-gradient)" />
       </g>
     </svg>
   );
